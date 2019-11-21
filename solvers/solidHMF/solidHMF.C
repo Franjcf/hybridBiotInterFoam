@@ -138,12 +138,8 @@ int main(int argc, char *argv[])
             {
                 #include "pEqn.H"
             }
-
- //           if (pimple.turbCorr())
- //           {
- //               turbulence->correct();
- //           }
         }
+
 
         runTime.write();
 

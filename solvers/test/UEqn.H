@@ -31,8 +31,8 @@
             fvc::reconstruct
             (
                 (
-		    mixture.surfaceTensionForce()*(1.-Solidf) //activate free fluid interface model
-	          + fvc::interpolate(PcCoeff)*fvc::snGrad(alpha1)*Solidf //activate porous media model
+		    mixture.surfaceTensionForce()*(1.-Solidf) 
+	          + fvc::interpolate(PcCoeff)*fvc::snGrad(alpha1)*Solidf 
                   - fvc::snGrad(p)
                 ) * mesh.magSf()
 		+fvc::interpolate(rho)*(g & mesh.Sf())

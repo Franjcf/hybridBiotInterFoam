@@ -124,7 +124,7 @@
         if ( (isA< fixedValueFvPatchField<vector> >(Uwetting.boundaryField()[patchi])) or 
 	     (isA< fixedValueFvPatchField<vector> >(UnonWetting.boundaryField()[patchi])) )
         {
-	      //Same as: Ur = U1/phiS1 -(U2)/phiS2 at the boundary
+	      // Ur = U1/phiS1 -(U2)/phiS2 at the boundary
               phirPoreBf[patchi] =
             		  (Uwetting.boundaryField()[patchi] & mesh.Sf().boundaryField()[patchi])
              		 /(eps.boundaryField()[patchi]*alpha1.boundaryField()[patchi] + 0.001)

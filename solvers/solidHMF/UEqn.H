@@ -4,8 +4,6 @@
         (1./eps)*(fvm::ddt(rho, U) + fvm::div(rhoPhiByEps, U) )
 
 	//Viscous Terms
-      //+ turbulence->divDevRhoReff((rho/eps), U)
-
       - (1/eps)*(fvm::laplacian((rho*mixture.nu()),U))
       - (1/eps)*(fvc::div((rho*mixture.nu())*dev2(T(fvc::grad(U)))))
 
@@ -31,8 +29,8 @@
             fvc::reconstruct
             (
                 (
-		    mixture.surfaceTensionForce()*(1.-Solidf) //activate free fluid interface model
-	          + fvc::interpolate(PcCoeff)*fvc::snGrad(alpha1)*Solidf //activate porous media model
+		    mixture.surfaceTensionForce()*(1.-Solidf) 
+	          + fvc::interpolate(PcCoeff)*fvc::snGrad(alpha1)*Solidf 
                   - fvc::snGrad(p)
                 ) * mesh.magSf()
 		+fvc::interpolate(rho)*(g & mesh.Sf())

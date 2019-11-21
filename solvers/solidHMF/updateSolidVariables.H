@@ -1,7 +1,7 @@
-// Labeling places that have porous media
+// Updating places that have porous media
 forAll(epss,celli)
 {
-	if(epss[celli]>0.01)
+	if(epss[celli]>0.01) 
         {
         Solid[celli]=1;
         }
@@ -11,7 +11,7 @@ forAll(epss,celli)
         }
 }
 
-//updating boundary patches
+// Updating boundary patches
 forAll(mesh.boundary(), patchi)
 {
         forAll(Solid.boundaryField()[patchi],facei)
@@ -23,9 +23,9 @@ forAll(mesh.boundary(), patchi)
         }
 }
 
-surfaceScalarField Solidf(fvc::interpolate(Solid));
 
-// Eliminating intermediate values of solid indicator function
+// Updating face-centered values of the Solid field
+surfaceScalarField Solidf(fvc::interpolate(Solid));
 forAll(Solidf,facei)
 {
         if(Solidf[facei]<1) // if <1 ==0.
@@ -33,3 +33,6 @@ forAll(Solidf,facei)
         Solidf[facei]=0;
         }
 }
+
+// Updating Fluid Volume Fraction (porosity)
+eps = (1-epss); 

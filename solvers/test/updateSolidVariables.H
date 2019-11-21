@@ -1,7 +1,7 @@
 // Labeling places that have porous media
 forAll(epss,celli)
 {
-	if(epss[celli]>0.01)
+	if(epss[celli]>0.1) //0.01
         {
         Solid[celli]=1;
         }
@@ -16,7 +16,7 @@ forAll(mesh.boundary(), patchi)
 {
         forAll(Solid.boundaryField()[patchi],facei)
         {
-                if(epss.boundaryField()[patchi][facei]>0.01)
+                if(epss.boundaryField()[patchi][facei]>0.1)
                 {Solid.boundaryFieldRef()[patchi][facei]=1;}
                 else
                 {Solid.boundaryFieldRef()[patchi][facei]=0;}

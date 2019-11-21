@@ -85,14 +85,13 @@
     Ur = ( Uwetting/max(alpha1,0.001) - UnonWetting/max((1.-alpha1),0.001) )/max(eps,0.001);
     surfaceScalarField phirPore(fvc::interpolate(Ur) & mesh.Sf());
     
-    //Test border attenuation
-    volVectorField SolidBorder = fvc::grad(mag(fvc::grad(Solid)));
-    forAll (Ur,celli)
-    {
-    if (mag(SolidBorder[celli])>0)
-    	{Ur[celli]=Ur[celli]*0;}
-    }
-
+    //Test border attenuation //does not seem to work
+    //volVectorField SolidBorder = fvc::grad(mag(fvc::grad(Solid)));
+    //forAll (Ur,celli)
+    //{
+    //if (mag(SolidBorder[celli])>0)
+    //	{Ur[celli]=Ur[celli]*0;}
+    //}
    
     surfaceScalarField::Boundary& phicBf =
     	phic.boundaryFieldRef();

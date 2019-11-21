@@ -22,6 +22,18 @@ fvVectorMatrix UsEqn
       
         //Terzaghi Term
        -Terzaghi
+
+	//Gravity Term
+      - epss*g 
+
+	//Capillary presure source
+      + CapTerm
+   
+	//Clay Transport Momentum Source
+      - fvc::Sp(eps*Drag/rho_s, U) 
+	
+	//Momentum Transfer to fluid do to relative velocity 
+      + fvm::Sp(epss*eps*Drag/rho_s, Us) 
 );	
 
 UsEqn.solve();

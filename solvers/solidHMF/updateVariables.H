@@ -41,6 +41,3 @@ PcCoeff = (
 	-pc
 	+(1./M)*(M1*(1.-alpha1) - M2*(alpha1))*dPcdS
 	);
-
-//Update Fluid Volume Fraction
-eps = (1-epss); 
