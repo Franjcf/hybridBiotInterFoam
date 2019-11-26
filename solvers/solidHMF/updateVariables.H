@@ -33,11 +33,17 @@ forAll(Drag,celli)
 		{Drag[celli]= 0;}
 }
 
+//Calculating A. Ferrari 2015 Coefficient (2.5 D term)
+DragF = 1/(Fk0*kr1/mu1 + Fk0*kr2/mu2);
+
 // Updating Capillary Pressure Model
 myCapModel().correct();
 pc = myCapModel().pc()*activateCapillarity; 
 dPcdS = myCapModel().dpcdS()*activateCapillarity; 
+//PcCoeff = dPcdS;
 PcCoeff = (  
 	-pc
 	+(1./M)*(M1*(1.-alpha1) - M2*(alpha1))*dPcdS
 	);
+
+//Maybe add eps = 1-epss here but we have checked before

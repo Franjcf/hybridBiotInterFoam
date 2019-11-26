@@ -14,7 +14,7 @@
       - fvc::Sp(epss*Drag,Us) 
 
         //2.5 D term from A. Ferrari 2015
-      + fvm::Sp((twoDkinv*rho*mixture.nu()),U)
+      + fvm::Sp(DragF,U)
 
     );
 

@@ -16,7 +16,7 @@ if (mesh.nInternalFaces())
         0.5*(gSum(sumPhis)/gSum(mesh.V().field()))*runTime.deltaTValue();
 }
 
-Info<< "Up Courant Number mean: " << meanCoNumUs
+Info<< "Us Courant Number mean: " << meanCoNumUs
     << " max: " << CoNumUs << endl;
 
 ///////////////////////////////////////////////

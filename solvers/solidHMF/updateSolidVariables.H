@@ -11,6 +11,8 @@ forAll(epss,celli)
         }
 }
 
+Solid.correctBoundaryConditions();
+
 // Updating boundary patches
 forAll(mesh.boundary(), patchi)
 {
@@ -22,7 +24,6 @@ forAll(mesh.boundary(), patchi)
                 {Solid.boundaryFieldRef()[patchi][facei]=0;}
         }
 }
-
 
 // Updating face-centered values of the Solid field
 surfaceScalarField Solidf(fvc::interpolate(Solid));

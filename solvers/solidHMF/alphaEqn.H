@@ -1,4 +1,3 @@
-
 {
     word alphaScheme("div(phi,alpha)");
     word alpharScheme("div(phirb,alpha)");
@@ -82,7 +81,9 @@
     UnonWetting.correctBoundaryConditions();
 
     // Defining relative velocity
-    Ur = ( Uwetting/max(alpha1,0.001) - UnonWetting/max((1.-alpha1),0.001) )/max(eps,0.001);
+    //Ur = ( Uwetting/max(alpha1,0.001) - UnonWetting/max((1.-alpha1),0.001) )/max(eps,0.001);
+    Ur = Solid*( Uwetting/max(alpha1,0.001) - UnonWetting/max((1.-alpha1),0.001) )/max(eps,0.001);
+
     surfaceScalarField phirPore(fvc::interpolate(Ur) & mesh.Sf());
     
     //Test border attenuation //does not seem to work
@@ -98,8 +99,7 @@
     surfaceScalarField::Boundary& phirPoreBf =
     	phirPore.boundaryFieldRef(); 
    
-    // Do not compress interface at non-coupled boundary faces
-    // (inlets, outlets etc.)
+    // Do not compress interface at non-coupled boundary faces (inlets, outlets etc.)
     forAll(phic.boundaryField(), patchi)
     {
         fvsPatchScalarField& phicp = phicBf[patchi];
@@ -181,7 +181,9 @@
                 alpha1,
                 alphaPhi,
                 talphaPhiCorr0.ref(),
-		oneField(),
+		zeroField(),
+		zeroField(),
+                oneField(),
                 zeroField()
             );
 
@@ -294,7 +296,7 @@
             alphaPhi = (alphaPhi - (1.0 - cnCoeff)*alphaPhi.oldTime())/cnCoeff;
         }
 
-        // Calculate the end-of-time-step mass flux
+            // Calculate the end-of-time-step mass flux
         rhoPhi = alphaPhi*(rho1 - rho2) + phi*rho2;
     }
 
