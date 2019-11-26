@@ -40,7 +40,6 @@ DragF = 1/(Fk0*kr1/mu1 + Fk0*kr2/mu2);
 myCapModel().correct();
 pc = myCapModel().pc()*activateCapillarity; 
 dPcdS = myCapModel().dpcdS()*activateCapillarity; 
-//PcCoeff = dPcdS;
 PcCoeff = (  
 	-pc
 	+(1./M)*(M1*(1.-alpha1) - M2*(alpha1))*dPcdS
