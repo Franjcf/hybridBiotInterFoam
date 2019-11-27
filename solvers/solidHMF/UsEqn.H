@@ -4,7 +4,7 @@ Info<< "\nCalculating Us" << endl;
 volVectorField Terzaghi = -(epss/rho_s)*fvc::grad(p);
 
 //Calculating Explicit Capillary Interaction force
-volVectorField CapTerm (eps/rho_s*(mixture.sigmaK()*(1-Solid) + PcCoeff*Solid)*fvc::grad(alpha1) ); 
+volVectorField CapTerm (eps/rho_s*(mixture.sigmaK()*(1-Solid) + PcCoeff*Solid)*fvc::grad(alpha2)); 
 
 fvVectorMatrix UsEqn
 	(
@@ -27,7 +27,7 @@ fvVectorMatrix UsEqn
       - epss*g 
 
 	//Capillary presure source
-      + CapTerm //should be positive
+      + CapTerm 
    
 	//Clay Transport Momentum Source
       - fvc::Sp(eps*Drag/rho_s, U) 

@@ -59,7 +59,7 @@ Foam::viscosityModels::SpearmanQuemada::calcNu() const
 //making sure that epssEffStar has maximim and minimum values for stability//
 
 epssStar.min((epssMax_.value()-0.01)); //0.05
-epssStar.max(0.3); //0.01
+epssStar.max(0.05); //0.05
 
 //Creating Tau and nuf fields
 volScalarField Tau0 = tau0_*pow( (epssStar/epssMax_) / max((1-epssStar/epssMax_),SMALL ),  Dstar_ ); 
