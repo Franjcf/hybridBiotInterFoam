@@ -1,6 +1,6 @@
 //Creating Fields for Solid Mechanics 
 
-Info<< "Reading intrinsic permeability field field K\n" << endl;
+Info<< "Reading Solid Velocity Field\n" << endl;
 volVectorField Us
 (
     IOobject

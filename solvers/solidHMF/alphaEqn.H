@@ -201,7 +201,10 @@
 
     for (int aCorr=0; aCorr<nAlphaCorr; aCorr++)
     {  
-	surfaceScalarField phir(Solidf*phirPore+(1.-Solidf)*phic*mixture.nHatf());
+        surfaceScalarField phir((1.-Solidf)*phic*mixture.nHatf());        
+        
+        if (activateUr == 1.)
+	{phir += Solidf*phirPore;}
 
         tmp<surfaceScalarField> talphaPhiUn
         (

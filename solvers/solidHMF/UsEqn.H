@@ -27,7 +27,7 @@ fvVectorMatrix UsEqn
       - epss*g 
 
 	//Capillary presure source
-      + CapTerm
+      + CapTerm //should be positive
    
 	//Clay Transport Momentum Source
       - fvc::Sp(eps*Drag/rho_s, U) 

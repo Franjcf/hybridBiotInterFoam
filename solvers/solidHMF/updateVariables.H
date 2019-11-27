@@ -1,5 +1,5 @@
 // Updating Relative Permeability Model
-k0 = K*(eps*eps*eps)/(max((1-eps)*(1-eps),SMALL));
+k0 = K*(1-epss)*(1-epss)*(1-epss)/max(epss*epss,SMALL);
 
 krModel->correct();
 kr1=krModel->krb();

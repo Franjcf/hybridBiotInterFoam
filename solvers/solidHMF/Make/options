@@ -17,4 +17,6 @@ EXE_LIBS = \
     -L$(FOAM_USER_LIBBIN) \
     -lporousImmiscibleIncompressibleTwoPhaseMixture \
     -lporousModels \
-    -lporousInterfaceProperties
+    -lporousInterfaceProperties \
+    -lSpearmanQuemada \
+    -lHerschelBulkleyQuemada

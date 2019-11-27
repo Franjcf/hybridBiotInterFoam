@@ -69,6 +69,8 @@ volVectorField Ur
     U*0
 );
 
+scalar activateUr(transportProperties.lookupOrDefault<scalar>("activateUr",1.));
+activateUr = activateUr;
 
 // Labeling the places that have porous media
 forAll(epss,celli) 
