@@ -81,8 +81,7 @@
     UnonWetting.correctBoundaryConditions();
 
     // Defining relative velocity
-    //Ur = ( Uwetting/max(alpha1,0.001) - UnonWetting/max((1.-alpha1),0.001) )/max(eps,0.001);
-    Ur = ( Uwetting/max(alpha1,0.001) - UnonWetting/max((1.-alpha1),0.001) )/max(eps,0.001);
+    Ur = ( Uwetting/max(alpha1,0.01) - UnonWetting/max((1.-alpha1),0.01) )/max(eps,0.01);
 
     surfaceScalarField phirPore(fvc::interpolate(Ur) & mesh.Sf());
     

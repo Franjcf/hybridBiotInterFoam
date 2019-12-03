@@ -1,7 +1,7 @@
     fvVectorMatrix UEqn
     (
 	//Inertial Terms
-        (1./eps)*(fvm::ddt(rho, U) + fvm::div(rhoPhiByEps, U) )
+        (1/eps)*(fvm::ddt(rho, U) + fvm::div(rhoPhiByEps, U) )
 
 	//Viscous Terms
       - (1/eps)*(fvm::laplacian((rho*mixture.nu()),U))
@@ -18,7 +18,7 @@
 
     );
 
-    UEqn.relax();
+    UEqn.relax();	
 
     if (pimple.momentumPredictor()) 
     {
