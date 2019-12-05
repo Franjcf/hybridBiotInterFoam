@@ -15,7 +15,7 @@
     volScalarField PcCoeff2 (PcCoeff);
     //volVectorField SolidBorder = fvc::grad(mag(fvc::grad(Solid)));
     volVectorField SolidBorder = fvc::grad(Solid);
-    forAll (PcCoeff,celli)
+    forAll (PcCoeff,celli) 
     {
     if (mag(SolidBorder[celli])>0)
     	{PcCoeff2[celli]=0;}
