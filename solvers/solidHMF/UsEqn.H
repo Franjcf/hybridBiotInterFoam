@@ -4,8 +4,8 @@ Info<< "\nCalculating Us" << endl;
 volVectorField Terzaghi = -(epss/rho_s)*fvc::grad(p);
 
 //Calculating Explicit Capillary Interaction force
-//volVectorField CapTerm (eps/rho_s*(mixture.sigmaK()*(1-Solid) + PcCoeff*Solid)*fvc::grad(alpha2)); 
-volVectorField CapTerm (eps/rho_s*PcCoeff*Solid*fvc::grad(alpha2)); 
+//volVectorField CapTerm (eps/rho_s*(mixture.sigmaK()*(1-Solid) + PcCoeff*Solid)*fvc::grad(alpha1)); 
+volVectorField CapTerm (eps/rho_s*PcCoeff*Solid*fvc::grad(alpha1)); //this is definitly alpha1, just look at zhang tets *pcAlpha1 examples. 
 
 fvVectorMatrix UsEqn
 	(

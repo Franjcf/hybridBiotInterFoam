@@ -82,17 +82,21 @@
 
     // Defining relative velocity
     Ur = ( Uwetting/max(alpha1,0.01) - UnonWetting/max((1.-alpha1),0.01) )/max(eps,0.01);
-
-    surfaceScalarField phirPore(fvc::interpolate(Ur) & mesh.Sf());
     
-    //Test border attenuation //does not seem to work
+    //Test border attenuation 
+    volVectorField SolidBorder = fvc::grad(mag(fvc::grad(Solid))); 
     //volVectorField SolidBorder = fvc::grad(Solid);
-    //forAll (Ur,celli)
-    //{
-    //if (mag(SolidBorder[celli])>0)
-    //	{Ur[celli]=Ur[celli]*0;}
-    //}
+    forAll (Ur,celli)
+    {
+    	if (mag(SolidBorder[celli])>0)
+    	{Ur[celli]= vector(0,0,0);}
+
+        //if (mag(Ur[celli]) > 1e2) 
+	//{Ur[celli] = vector(0,0,0);}
+    }
    
+    surfaceScalarField phirPore(fvc::interpolate(Ur) & mesh.Sf());
+
     surfaceScalarField::Boundary& phicBf =
     	phic.boundaryFieldRef();
     surfaceScalarField::Boundary& phirPoreBf =

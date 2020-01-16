@@ -14,12 +14,13 @@
     //Test border attenuation
     volScalarField PcCoeff2 (PcCoeff);
     //volVectorField SolidBorder = fvc::grad(mag(fvc::grad(Solid)));
+    
     volVectorField SolidBorder = fvc::grad(Solid);
-    forAll (PcCoeff,celli) 
-    {
-    if (mag(SolidBorder[celli])>0)
-    	{PcCoeff2[celli]=0;}
-    }
+    //forAll (PcCoeff,celli) 
+    //{
+    //if (mag(SolidBorder[celli])>0)
+   // 	{PcCoeff2[celli]=0;}
+    //}
 
     // Gravity Contribution
     surfaceScalarField phiG 
