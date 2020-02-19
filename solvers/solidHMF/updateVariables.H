@@ -45,4 +45,8 @@ PcCoeff = (
 	+(1./M)*(M1*(1.-alpha1) - M2*(alpha1))*dPcdS
 	);
 
+//pc = myCapModel().pc()*activateCapillarity; 
+//dPcdS = myCapModel().dpcdS()*activateCapillarity; 
+//PcCoeff = dPcdS;
+
 //Maybe add eps = 1-epss here but we have checked before
