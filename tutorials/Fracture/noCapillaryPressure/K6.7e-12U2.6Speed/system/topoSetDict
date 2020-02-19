@@ -1,0 +1,346 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  5                                     |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      topoSetDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+actions
+(
+  // 6-actions patch generation: cut out 'inlet' faces from 'top' 
+    { 
+        name    leftInlet; 
+        type    faceSet; 
+        action  new; 
+        source  patchToFace; 
+        sourceInfo 
+        { 
+            name "oldInternalFaces"; 
+        } 
+    } 
+
+
+    // cutting a teporary volume of the size of the inlet 
+    { 
+        name    tempset1; 
+        type    cellSet; 
+        action  new; 
+        source  boxToCell; 
+        sourceInfo 
+        { 
+            box (0.244 0.245 0)(0.246 0.255 1); //Left inlet
+	    //box (0.252 0.245 0)(0.256 0.255 1); //Right inlet
+	    //box (0.245 0.245 0)(0.255 0.244 1); //Lower inlet
+	    //box (0.245 0.255 0)(0.255 0.256 1); //Upper inlet
+        } 
+    } 
+
+    // selecting the faces belonging to the cut volume 
+    { 
+        name    tempset2; 
+        type    faceSet; 
+        action  new; 
+        source  cellToFace; 
+        sourceInfo 
+        { 
+            set        tempset1; 
+            option    all;    //Is there not better option, like only selecting boundary faces? 
+        } 
+    } 
+
+    // temporary copy of the "top" boundary faces 
+    { 
+        name    tempset3; 
+        type    faceSet; 
+        action  new; 
+        source  faceToFace; 
+        sourceInfo 
+        { 
+            set "leftInlet"; 
+        } 
+    } 
+
+    // removing the leftInlet faces from the top-faces-clone by taking the faces from the cut volume and substracting them from the boundary faces. This results in a "negative" of the actual inlet
+    { 
+        name    tempset3; 
+        type    faceSet; 
+        action  delete; 
+        source  faceToFace; 
+        sourceInfo 
+        { 
+            set "tempset2"; 
+        } 
+    } 
+
+    // final leftInlet patch = top-faces - tempset3 
+    //you remove all the faces that are not part of the inlet (the negative) from your face set,     leaving you with the desired faces. 
+    { 
+        name    leftInlet; //this is the final result to use in createPatchDict ! 
+        type    faceSet; 
+        action  delete; 
+        source  faceToFace; 
+        sourceInfo 
+        { 
+            set "tempset3"; 
+        } 
+    } 
+
+///
+
+// 6-actions patch generation: cut out 'inlet' faces from 'top' 
+    { 
+        name    rightInlet; 
+        type    faceSet; 
+        action  new; 
+        source  patchToFace; 
+        sourceInfo 
+        { 
+            name "oldInternalFaces"; 
+        } 
+    } 
+
+
+    // cutting a teporary volume of the size of the inlet 
+    { 
+        name    tempset1; 
+        type    cellSet; 
+        action  new; 
+        source  boxToCell; 
+        sourceInfo 
+        { 
+            //box (0.244 0.245 0)(0.245 0.255 1); //Left inlet
+	    box (0.254 0.245 0)(0.256 0.255 1); //Right inlet
+	    //box (0.245 0.245 0)(0.255 0.244 1); //Lower inlet
+	    //box (0.245 0.255 0)(0.255 0.256 1); //Upper inlet
+        } 
+    } 
+
+    // selecting the faces belonging to the cut volume 
+    { 
+        name    tempset2; 
+        type    faceSet; 
+        action  new; 
+        source  cellToFace; 
+        sourceInfo 
+        { 
+            set        tempset1; 
+            option    all;    //Is there not better option, like only selecting boundary faces? 
+        } 
+    } 
+
+    // temporary copy of the "top" boundary faces 
+    { 
+        name    tempset3; 
+        type    faceSet; 
+        action  new; 
+        source  faceToFace; 
+        sourceInfo 
+        { 
+            set "rightInlet"; 
+        } 
+    } 
+
+    // removing the leftInlet faces from the top-faces-clone by taking the faces from the cut volume and substracting them from the boundary faces. This results in a "negative" of the actual inlet
+    { 
+        name    tempset3; 
+        type    faceSet; 
+        action  delete; 
+        source  faceToFace; 
+        sourceInfo 
+        { 
+            set "tempset2"; 
+        } 
+    } 
+
+    // final leftInlet patch = top-faces - tempset3 
+    //you remove all the faces that are not part of the inlet (the negative) from your face set,     leaving you with the desired faces. 
+    { 
+        name    rightInlet; //this is the final result to use in createPatchDict ! 
+        type    faceSet; 
+        action  delete; 
+        source  faceToFace; 
+        sourceInfo 
+        { 
+            set "tempset3"; 
+        } 
+    } 
+
+    //here ends the 6-actions sequence to cut a patch from an existing patch. 
+
+//////
+
+// 6-actions patch generation: cut out 'inlet' faces from 'top' 
+    { 
+        name    lowerInlet; 
+        type    faceSet; 
+        action  new; 
+        source  patchToFace; 
+        sourceInfo 
+        { 
+            name "oldInternalFaces"; 
+        } 
+    } 
+
+
+    // cutting a teporary volume of the size of the inlet 
+    { 
+        name    tempset1; 
+        type    cellSet; 
+        action  new; 
+        source  boxToCell; 
+        sourceInfo 
+        { 
+            //box (0.244 0.245 0)(0.245 0.255 1); //Left inlet
+	    //box (0.255 0.245 0)(0.256 0.255 1); //Right inlet
+	    box (0.245 0.244 0)(0.255 0.246 1); //Lower inlet
+	    //box (0.245 0.255 0)(0.255 0.256 1); //Upper inlet
+        } 
+    } 
+
+    // selecting the faces belonging to the cut volume 
+    { 
+        name    tempset2; 
+        type    faceSet; 
+        action  new; 
+        source  cellToFace; 
+        sourceInfo 
+        { 
+            set        tempset1; 
+            option    all;    //Is there not better option, like only selecting boundary faces? 
+        } 
+    } 
+
+    // temporary copy of the "top" boundary faces 
+    { 
+        name    tempset3; 
+        type    faceSet; 
+        action  new; 
+        source  faceToFace; 
+        sourceInfo 
+        { 
+            set "lowerInlet"; 
+        } 
+    } 
+
+    // removing the leftInlet faces from the top-faces-clone by taking the faces from the cut volume and substracting them from the boundary faces. This results in a "negative" of the actual inlet
+    { 
+        name    tempset3; 
+        type    faceSet; 
+        action  delete; 
+        source  faceToFace; 
+        sourceInfo 
+        { 
+            set "tempset2"; 
+        } 
+    } 
+
+    // final leftInlet patch = top-faces - tempset3 
+    //you remove all the faces that are not part of the inlet (the negative) from your face set,     leaving you with the desired faces. 
+    { 
+        name    lowerInlet; //this is the final result to use in createPatchDict ! 
+        type    faceSet; 
+        action  delete; 
+        source  faceToFace; 
+        sourceInfo 
+        { 
+            set "tempset3"; 
+        } 
+    } 
+
+/////
+
+// 6-actions patch generation: cut out 'inlet' faces from 'top' 
+    { 
+        name    upperInlet; 
+        type    faceSet; 
+        action  new; 
+        source  patchToFace; 
+        sourceInfo 
+        { 
+            name "oldInternalFaces"; 
+        } 
+    } 
+
+
+    // cutting a teporary volume of the size of the inlet 
+    { 
+        name    tempset1; 
+        type    cellSet; 
+        action  new; 
+        source  boxToCell; 
+        sourceInfo 
+        { 
+            //box (0.244 0.245 0)(0.245 0.255 1); //Left inlet
+	    //box (0.255 0.245 0)(0.256 0.255 1); //Right inlet
+	    //box (0.245 0.245 0)(0.255 0.244 1); //Lower inlet
+	    box (0.245 0.254 0)(0.255 0.256 1); //Upper inlet
+        } 
+    } 
+
+    // selecting the faces belonging to the cut volume 
+    { 
+        name    tempset2; 
+        type    faceSet; 
+        action  new; 
+        source  cellToFace; 
+        sourceInfo 
+        { 
+            set        tempset1; 
+            option    all;    //Is there not better option, like only selecting boundary faces? 
+        } 
+    } 
+
+    // temporary copy of the "top" boundary faces 
+    { 
+        name    tempset3; 
+        type    faceSet; 
+        action  new; 
+        source  faceToFace; 
+        sourceInfo 
+        { 
+            set "upperInlet"; 
+        } 
+    } 
+
+    // removing the leftInlet faces from the top-faces-clone by taking the faces from the cut volume and substracting them from the boundary faces. This results in a "negative" of the actual inlet
+    { 
+        name    tempset3; 
+        type    faceSet; 
+        action  delete; 
+        source  faceToFace; 
+        sourceInfo 
+        { 
+            set "tempset2"; 
+        } 
+    } 
+
+    // final leftInlet patch = top-faces - tempset3 
+    //you remove all the faces that are not part of the inlet (the negative) from your face set,     leaving you with the desired faces. 
+    { 
+        name    upperInlet; //this is the final result to use in createPatchDict ! 
+        type    faceSet; 
+        action  delete; 
+        source  faceToFace; 
+        sourceInfo 
+        { 
+            set "tempset3"; 
+        } 
+    } 
+
+//blockMesh
+//topoSet
+//createPatch -overwrite
+
+);
+
+// ************************************************************************* //
