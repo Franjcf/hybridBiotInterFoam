@@ -59,8 +59,8 @@ Foam::viscosityModels::HerschelBulkleyQuemada::calcNu() const
     volScalarField epssStar = U_.mesh().lookupObject<volScalarField>("epss"); 
     //epss or epssEff
 
-epssStar.min((epssMax_.value()-0.01));
-epssStar.max(0.01);
+epssStar.min((epssMax_.value()-0.01)); //0.01
+epssStar.max(0.01); //0.01
 
 //Creating Tau and nuf Fields
 

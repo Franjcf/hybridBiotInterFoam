@@ -1,0 +1,4 @@
+tractionDisplacement/tractionDisplacementFvPatchVectorField.C
+testSolidPMD.C
+
+EXE = $(FOAM_USER_APPBIN)/testSolidPMD

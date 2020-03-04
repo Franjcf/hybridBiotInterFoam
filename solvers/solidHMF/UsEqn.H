@@ -30,10 +30,10 @@ fvVectorMatrix UsEqn
 	//Capillary presure source
       + CapTerm 
    
-	//Clay Transport Momentum Source
+	//Momentum Source from fluid to solid
       - fvc::Sp(eps*Drag/rho_s, U) 
 	
-	//Momentum Transfer to fluid do to relative velocity 
+	//Momentum Transfer to fluid from solid 
       + fvm::Sp(epss*eps*Drag/rho_s, Us) 
 );	
 

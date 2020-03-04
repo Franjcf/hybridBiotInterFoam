@@ -1,0 +1,477 @@
+IOdictionary transportProperties
+(
+    IOobject
+    (
+        "transportProperties",
+        runTime.constant(),
+        mesh,
+        IOobject::MUST_READ_IF_MODIFIED,
+        IOobject::NO_WRITE
+    )
+);
+
+Info<< "Reading permeability of clay of pure phase 1 k01\n" << endl;
+dimensionedScalar k01
+(
+    "k01",
+    transportProperties.lookup("k01")
+);
+
+Info<< "Reading permeability of clay of pure phase 2 k02\n" << endl;
+dimensionedScalar k02
+(
+    "k02",
+    transportProperties.lookup("k02")
+);
+
+Info<< "Reading Capillary Pressure Coeff 'm'\n" << endl;
+dimensionedScalar m
+(
+    "m",
+    transportProperties.lookup("m")
+);
+
+Info<< "Reading Capillary Pressure Coeff 'a'\n" << endl;
+dimensionedScalar a
+(
+    "a",
+    transportProperties.lookup("a")
+);
+
+Info<< "Reading alpha1IrrPerm'\n" << endl;
+dimensionedScalar alpha1IrrPerm
+(
+    "alpha1IrrPerm",
+    transportProperties.lookup("alpha1IrrPerm")
+);
+
+Info<< "Reading alpha2IrrPerm'\n" << endl;
+dimensionedScalar alpha2IrrPerm
+(
+    "alpha2IrrPerm",
+    transportProperties.lookup("alpha2IrrPerm")
+);
+
+Info<< "Reading alpha1IrrPres'\n" << endl;
+dimensionedScalar alpha1IrrPres
+(
+    "alpha1IrrPres",
+    transportProperties.lookup("alpha1IrrPres")
+);
+
+Info<< "Reading alpha1MaxPres'\n" << endl;
+dimensionedScalar alpha1MaxPres
+(
+    "alpha1MaxPres",
+    transportProperties.lookup("alpha1MaxPres")
+);
+
+Info<< "Reading Minimum Caplillary Pressure Pc0\n" << endl;
+dimensionedScalar Pc0
+(
+    "Pc0",
+    transportProperties.lookup("Pc0")
+);
+
+Info<< "Reading Maximim Caplillary Pressure PcMax\n" << endl;
+dimensionedScalar PcMax
+(
+    "PcMax",
+    transportProperties.lookup("PcMax")
+);
+
+Info<< "Reading field p_rgh\n" << endl;
+volScalarField p_rgh
+(
+    IOobject
+    (
+        "p_rgh",
+        runTime.timeName(),
+        mesh,
+        IOobject::MUST_READ,
+        IOobject::AUTO_WRITE
+    ),
+    mesh
+);
+
+Info<< "Reading solid fraction field epss\n" << endl;
+volScalarField epss
+(
+    IOobject
+    (
+        "epss",
+        runTime.timeName(),
+        mesh,
+        IOobject::MUST_READ,
+        IOobject::AUTO_WRITE
+    ),
+    mesh
+);
+
+Info<< "Reading field fluid fraction field epsf\n" << endl;
+volScalarField epsf
+(
+    IOobject
+    (
+        "epsf",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::NO_WRITE
+    ),
+    (1-epss)
+);
+
+Info<< "Reading indicator variable B\n" << endl;
+volScalarField B
+(
+    IOobject
+    (
+        "B",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+    ),
+    mesh,
+    dimensionedScalar ("B", dimensionSet(0,0,0,0,0,0,0), 0) 
+);
+
+Info<< "Reading field U\n" << endl;
+volVectorField U
+(
+    IOobject
+    (
+        "U",
+        runTime.timeName(),
+        mesh,
+        IOobject::MUST_READ,
+        IOobject::AUTO_WRITE
+    ),
+    mesh
+);
+
+#include "createPhi.H"
+
+Info<< "Reading transportProperties\n" << endl;
+immiscibleIncompressibleTwoPhaseMixture mixture(U, phi);
+
+volScalarField& alpha1(mixture.alpha1());
+volScalarField& alpha2(mixture.alpha2());
+
+const dimensionedScalar& rho1 = mixture.rho1();
+const dimensionedScalar& rho2 = mixture.rho2();
+
+
+// Need to store rho for ddt(rho, U)
+volScalarField rho
+(
+    IOobject
+    (
+        "rho",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT
+    ),
+    alpha1*rho1 + alpha2*rho2
+);
+rho.oldTime();
+
+// Mass flux
+surfaceScalarField rhoPhi
+(
+    IOobject
+    (
+        "rhoPhi",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::NO_WRITE
+    ),
+    fvc::interpolate(rho)*phi
+);
+
+
+// Construct incompressible turbulence model
+autoPtr<incompressible::turbulenceModel> turbulence
+(
+    incompressible::turbulenceModel::New(U, phi, mixture)
+);
+
+#include "readGravitationalAcceleration.H"
+#include "readhRef.H"
+#include "gh.H"
+
+volScalarField p
+(
+    IOobject
+    (
+        "p",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::AUTO_WRITE
+    ),
+    p_rgh + rho*gh
+);
+
+label pRefCell = 0;
+scalar pRefValue = 0.0;
+setRefCell
+(
+    p,
+    p_rgh,
+    pimple.dict(),
+    pRefCell,
+    pRefValue
+);
+
+if (p_rgh.needReference())
+{
+    p += dimensionedScalar
+    (
+        "p",
+        p.dimensions(),
+        pRefValue - getRefCellValue(p, pRefCell)
+    );
+    p_rgh = p - rho*gh;
+}
+
+mesh.setFluxRequired(p_rgh.name());
+mesh.setFluxRequired(alpha1.name());
+
+// MULES flux from previous time-step
+surfaceScalarField alphaPhi
+(
+    IOobject
+    (
+        "alphaPhi",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+    ),
+    phi*fvc::interpolate(alpha1)
+);
+
+
+Info<< "Reading absolute permeability of first phase k1\n" << endl;
+volScalarField k1
+(
+    IOobject
+    (
+        "k1",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::NO_WRITE
+    ),
+    k01*((1-epss)*(1-epss)*(1-epss))/(epss*epss)
+);
+
+Info<< "Reading absolute permeability of second phase k2\n" << endl;
+volScalarField k2
+(
+    IOobject
+    (
+        "k2",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::NO_WRITE
+    ),
+    k02*((1-epss)*(1-epss)*(1-epss))/(epss*epss)
+);
+
+Info<< "Reading inverse permeability field kinv\n" << endl;
+volScalarField kinv
+(
+    IOobject
+    (
+        "kinv",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+    ),
+    1/(alpha1*k01+alpha2*k02)
+);
+
+//Relative permeability models
+
+Info<< "Reading k1rel\n" << endl;
+volScalarField k1rel
+(
+    IOobject
+    (
+        "k1rel",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::NO_WRITE
+    ),
+    mesh,
+    dimensionedScalar ("k1rel", dimensionSet(0,0,0,0,0,0,0), 0) 
+);
+
+Info<< "Reading k2rel\n" << endl;
+volScalarField k2rel
+(
+    IOobject
+    (
+        "k2rel",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::NO_WRITE
+    ),
+    mesh,
+    dimensionedScalar ("k2rel", dimensionSet(0,0,0,0,0,0,0), 0) 
+);
+
+Info<< "Reading k1real\n" << endl;
+volScalarField k1real
+(
+    IOobject
+    (
+        "k1real",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::NO_WRITE
+    ),
+    mesh,
+    dimensionedScalar ("k1real", dimensionSet(0,2,0,0,0,0,0), 0) 
+);
+
+Info<< "Reading k2real\n" << endl;
+volScalarField k2real
+(
+    IOobject
+    (
+        "k2real",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::NO_WRITE
+    ),
+    mesh,
+    dimensionedScalar ("k2real", dimensionSet(0,2,0,0,0,0,0), 0) 
+);
+
+Info<< "Reading alpha1effPerm\n" << endl;
+volScalarField alpha1effPerm
+(
+    IOobject
+    (
+        "alpha1effPerm",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::NO_WRITE
+    ),
+    alpha1
+	
+);
+
+Info<< "Reading alpha1effPres\n" << endl;
+volScalarField alpha1effPres
+(
+    IOobject
+    (
+        "alpha1effPres",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::NO_WRITE
+    ),
+    alpha1
+	
+);			
+
+//Capillary Pressure Models
+
+Info<< "Reading Capillary Pressure Coefficient PcCoeff\n" << endl;
+volScalarField PcCoeff
+(
+    IOobject
+    (
+        "PcCoeff",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::NO_WRITE
+    ),
+    mesh,
+    Pc0 //will be changed first thing
+);
+
+Info<< "Reading gradPc\n" << endl;
+volVectorField gradPc
+(
+    IOobject
+    (
+        "gradPc",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::AUTO_WRITE
+    ),
+    PcCoeff*fvc::grad(alpha1)//can change for other models
+);
+
+#include "createSurfaceFluxes.H"
+	
+// MULES Correction
+tmp<surfaceScalarField> talphaPhiCorr0;
+
+#include "createMRF.H"
+
+//updating indicator variable for capillary pressure
+forAll(epss,celli) //P-pore only in clay
+{
+	if(epss[celli]>0.01)
+	{	
+	B[celli]=1; //in clay (use porous Pc models)
+	}
+	else
+	{
+	B[celli]=0; //in free pore (use large scale Pc model)
+	}
+}
+
+
+//testing STuff
+Info<< "Reading indicator variable B\n" << endl;
+volVectorField gradBeta
+(
+    IOobject
+    (
+        "gradBeta",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+    ),
+    fvc::grad(B)
+);
+
+
+dimensionedScalar little("little", dimensionSet(0,-1,0,0,0,0,0), 1e-20); 
+
+Info<< "Reading indicator variable B\n" << endl;
+volVectorField Bnormal
+(
+    IOobject
+    (
+        "Bnormal",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+    ),
+    gradBeta/(mag(gradBeta)+little)
+);
+
+
+
