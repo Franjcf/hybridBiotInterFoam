@@ -44,8 +44,8 @@ surfaceScalarField Dragf ("Dragf",1/Mf);
 volScalarField Drag ("Drag", 1/M);
 
 // A. Ferrari 2015 2.5 D drag coefficient
-dimensionedScalar Fk0("Fk0", transportProperties.lookup("Fk0"));
-volScalarField DragF("DragF", 1/(Fk0*kr1/mu1 + Fk0*kr2/mu2));
+dimensionedScalar invFk0("Fk0", transportProperties.lookup("invFk0",0.));
+volScalarField DragF("DragF", (1-Solid)*invFk0*mixture.nu()*rho);
 	
 // Defining relative permeability and capillary pressure models
 autoPtr<capillarityModel> myCapModel = capillarityModel::New("pc",transportProperties,alpha1);

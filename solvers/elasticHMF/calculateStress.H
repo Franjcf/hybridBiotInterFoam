@@ -10,13 +10,13 @@
                 IOobject::NO_READ,
                 IOobject::AUTO_WRITE
             ),
-            rho*sigmaD
+            rho_s*sigmaD
         );
 
         if (thermalStress)
         {
             const volScalarField& T = Tptr();
-            sigma = sigma - I*(rho*threeKalpha*T);
+            sigma = sigma - I*(rho_s*threeKalpha*T);
         }
 
         volScalarField sigmaEq

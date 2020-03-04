@@ -11,6 +11,8 @@ scalar initialResidual = 0;
 volVectorField Terzaghi = -(epss/rho_s)*fvc::grad(p);
 volVectorField CapTerm (eps/rho_s*PcCoeff*Solid*fvc::grad(alpha1)); 
 
+//Calculating Displacement
+
         do
         {
             if (thermalStress)
@@ -34,6 +36,9 @@ volVectorField CapTerm (eps/rho_s*PcCoeff*Solid*fvc::grad(alpha1));
 		    //Terzaghi Term
 		    + Terzaghi
 
+		    //Gravity Term
+		    + epss*g
+
                     //Transport Momentum Source 
                     + fvc::Sp(eps*Drag/rho_s, U)
                     - fvc::Sp(epss*eps*Drag/rho_s, Us)
@@ -41,8 +46,8 @@ volVectorField CapTerm (eps/rho_s*PcCoeff*Solid*fvc::grad(alpha1));
                     //Capillary Pressure Source
                     - CapTerm                   
 
-		  //Explicit Part of Stress Tensor
-                  + divSigmaExp 
+                    //Explicit Part of Stress Tensor
+                    + divSigmaExp 
                 );
 
 
@@ -59,14 +64,14 @@ volVectorField CapTerm (eps/rho_s*PcCoeff*Solid*fvc::grad(alpha1));
 
                 if (!compactNormalStress)
                 {
-                    divSigmaExp = fvc::div(DEqn.flux()); //may neet to add an epssInterpolate
+                    divSigmaExp = fvc::div(DEqn.flux()); 
                 }
             }
 
             {//Calculating Explicit Stress Tensor
 
                 volTensorField gradD(fvc::grad(D));
-                sigmaD = (epss*mu*twoSymm(gradD) + epss*(lambda*I)*tr(gradD)); //added epss here
+                sigmaD = (epss*mu*twoSymm(gradD) + epss*(lambda*I)*tr(gradD));
 
                 if (compactNormalStress) 
                 {
