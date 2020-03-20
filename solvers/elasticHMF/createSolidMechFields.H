@@ -17,6 +17,20 @@ volVectorField D
     mesh
 );
 
+Info<< "Reading field superficial displacement Dsup\n" << endl;
+volVectorField Dsup
+(
+    IOobject
+    (
+        "Dsup",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+    ),
+    epss*D
+);
+
 Info<< "Reading Solid Velocity Field\n" << endl;
 volVectorField Us
 (
@@ -30,6 +44,7 @@ volVectorField Us
     ),
     fvc::ddt(D)
 );
+
 
 #include "createSurfaceFluxesSolid.H"
 

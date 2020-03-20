@@ -2,6 +2,7 @@
 Us = fvc::ddt(D);
 Us.correctBoundaryConditions();
 phis = fvc::interpolate(Us) & mesh.Sf();  
+Dsup = D*epss;
 
 //Solving Solid Continuity Equation
 
