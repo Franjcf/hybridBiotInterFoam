@@ -7,11 +7,13 @@ This solver simulates two-phase flow in *deformable* porous media that contains 
 This repository was created by Francisco J. Carrillo and Cyprien Soulaine with the
 support of Ian C. Bourg. 
 
-.. figure:: /figures/conceptual.png
+.. figure:: /figures/conceptual.jpg
     :align: right
     :alt: alternate text
     :figclass: align-right
     Conceptual Representation of the Modeling Framework.
+
+.. figure:: /figures/coastal.jpg
 
 ----------------------------------------------------------------------------
 
