@@ -8,12 +8,13 @@ This repository was created by Francisco J. Carrillo and Cyprien Soulaine with t
 support of Ian C. Bourg. 
 
 .. figure:: /figures/conceptual.jpg
-    :align: right
-    :alt: alternate text
-    :figclass: align-right
+  
     Conceptual Representation of the Modeling Framework.
+    
+.. image:: /figures/coastal.jpg
 
-.. figure:: /figures/coastal.jpg
+
+Calculation of Von-Miss Stresses During Wave propagation in Coastal Barriers.
 
 ----------------------------------------------------------------------------
 
