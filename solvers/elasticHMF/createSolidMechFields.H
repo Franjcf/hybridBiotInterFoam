@@ -81,7 +81,7 @@ volSymmTensorField sigmaD
         IOobject::NO_READ,
         IOobject::NO_WRITE
     ),
-    epss*mu*twoSymm(fvc::grad(D)) + epss*lambda*(I*tr(fvc::grad(D)))
+    mu*twoSymm(fvc::grad(D)) + lambda*(I*tr(fvc::grad(D)))
 );
 
 Info<< "Calculating explicit part of div(sigma) divSigmaExp\n" << endl;
@@ -102,11 +102,11 @@ volVectorField divSigmaExp
 
 if (compactNormalStress)
 {
-    divSigmaExp -= fvc::laplacian(epss*(2*mu + lambda), D, "laplacian(DD,D)");
+    divSigmaExp -= fvc::laplacian((2*mu + lambda), D, "laplacian(DD,D)");
 }
 else
 {
-    divSigmaExp -= fvc::div(epss*(2*mu + lambda)*fvc::grad(D), "div(sigmaD)");
+    divSigmaExp -= fvc::div((2*mu + lambda)*fvc::grad(D), "div(sigmaD)");
 }
 
 mesh.setFluxRequired(D.name());

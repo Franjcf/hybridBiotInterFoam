@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ## \file runTutorials.py
 ## Script for running all validations cases
-## adapted from impesFOAM source code in Hourge P. et al (2014)
+## adapted from porousMultiphaseFoam source code, Horgue P. et al. (2014)
 
 # import
 from __future__ import with_statement
@@ -47,7 +47,7 @@ class testCase:
         else:
 
             find_str = "FOAM exiting"
-            foamFile = "log."+"hybridMultiphaseFoam"
+            foamFile = "log."+"hybridPorousInterFoam"
             with open(foamFile, "r") as f:
                 f.seek(0, 2)
                 fsize = f.tell()

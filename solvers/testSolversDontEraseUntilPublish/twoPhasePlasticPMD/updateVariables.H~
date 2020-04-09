@@ -1,0 +1,37 @@
+//Update Variables
+
+//updating indicator variable for capillary pressure
+forAll(epss,celli) //P-pore only in clay
+{
+	if(epss[celli]>0.01)
+	{	
+	B[celli]=1; //in clay (use porous Pc models)
+	}
+	else
+	{
+	B[celli]=0; //in free pore (use large scale Pc model)
+	}
+}
+
+//Calculating Changes in Permeability
+
+Info<< "\nUpdating Relative Permeability \n" << endl;
+
+#include "relativePerm.H"
+
+//Pressure Models
+
+Info<< "\nUpdating Capillary Pressure Models \n" << endl;
+
+#include "PcModels.H"
+
+//updating diffusivity and other variables
+
+//D=Df*pow((1-epss),(n-1));
+
+epsf=1-epss;
+
+gradBeta = fvc::grad(B);
+Bnormal = gradBeta/(mag(gradBeta)+little);
+
+

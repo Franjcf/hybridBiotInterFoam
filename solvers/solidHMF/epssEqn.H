@@ -11,3 +11,4 @@ epssEqn.solve();
 epss.correctBoundaryConditions();
 
 epss.min(0.999);
+epss.max(0.0);

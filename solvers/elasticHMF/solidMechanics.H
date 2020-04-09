@@ -31,7 +31,7 @@ volVectorField CapTerm (eps/rho_s*PcCoeff*Solid*fvc::grad(alpha1));
                     fvm::d2dt2(epss,D) 
                  ==
 		    //implicit part of the stress tensor
-                    fvm::laplacian((2*mu + lambda)*epss, D, "laplacian(DD,D)")
+                    epss*fvm::laplacian((2*mu + lambda), D, "laplacian(DD,D)")
 
 		    //Terzaghi Term
 		    + Terzaghi
@@ -47,7 +47,7 @@ volVectorField CapTerm (eps/rho_s*PcCoeff*Solid*fvc::grad(alpha1));
                     - CapTerm                   
 
                     //Explicit Part of Stress Tensor
-                    + divSigmaExp 
+                    + epss*divSigmaExp 
                 );
 
 
@@ -71,13 +71,13 @@ volVectorField CapTerm (eps/rho_s*PcCoeff*Solid*fvc::grad(alpha1));
             {//Calculating Explicit Stress Tensor
 
                 volTensorField gradD(fvc::grad(D));
-                sigmaD = (epss*mu*twoSymm(gradD) + epss*(lambda*I)*tr(gradD));
+                sigmaD = (mu*twoSymm(gradD) + (lambda*I)*tr(gradD));
 
                 if (compactNormalStress) 
                 {
                     divSigmaExp = fvc::div
                     (
-                        sigmaD - ((2*mu + lambda)*epss*gradD),
+                        sigmaD - ((2*mu + lambda)*gradD),
                         "div(sigmaD)"
                     );
                 }

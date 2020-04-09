@@ -1,7 +1,10 @@
 # tutorials list for python validation script
-# adapted from impesFOAM source code in Hourge P. et al (2014))
+# adapted from porousMultiphaseFoam source code, Horgue P. et al. (2014)
 
 tutorials = [
+             # Case Template 
+             {'category' : "Case_Template", 'case' : "template"}, \
+
 	     # Darcy Flow Validation
              {'category' : "Darcy_Flow_Cases", 'case' : "Buckley-Leverett/flow_Driven_BrooksCorey"}, \
              {'category' : "Darcy_Flow_Cases", 'case' : "Buckley-Leverett/gravity_Driven_BrooksCorey"}, \
@@ -17,8 +20,6 @@ tutorials = [
              {'category' : "Free_Flow_Cases", 'case' : "Capillary_Rise/standard_Boundary"}, \
              {'category' : "Free_Flow_Cases", 'case' : "Flat_Plate_Contact_Angle/porous_Boundary"}, \
              {'category' : "Free_Flow_Cases", 'case' : "Flat_Plate_Contact_Angle/standard_Boundary"}, \
-             {'category' : "Free_Flow_Cases", 'case' : "Hele-Shaw_Capillary_Flow/porous_Boundary"}, \
-             {'category' : "Free_Flow_Cases", 'case' : "Hele-Shaw_Capillary_Flow/standard_Boundary"}, \
 
              # Example Applications
              {'category' : "Example_Applications", 'case' : "Viscous_Fingering_Reservoir/viscous_Fingering"}, \
