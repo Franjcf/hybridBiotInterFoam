@@ -33,7 +33,7 @@ fvVectorMatrix UsEqn
 	//Momentum Source from fluid to solid
       - fvc::Sp(eps*Drag/rho_s, U) 
 	
-	//Momentum Transfer to fluid from solid 
+	//Momentum Transfer from solid to fluid 
       + fvm::Sp(epss*eps*Drag/rho_s, Us) 
 );	
 

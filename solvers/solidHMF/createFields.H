@@ -152,12 +152,6 @@ surfaceScalarField rhoPhiByEps
     rhoPhi*linearInterpolate(1/(eps+SMALL))
 );
 
-// Construct incompressible turbulence model
-//autoPtr<incompressible::turbulenceModel> turbulence
-//(
-//    incompressible::turbulenceModel::New(U, phi, mixture)
-//);
-
 #include "readGravitationalAcceleration.H"
 #include "readhRef.H"
 #include "gh.H"
