@@ -9,7 +9,9 @@ scalar initialResidual = 0;
 
 //Calculating Source Terms
 volVectorField Terzaghi = -(epss/rho_s)*fvc::grad(p);
-volVectorField CapTerm (eps/rho_s*PcCoeff*Solid*fvc::grad(alpha1)); 
+//volVectorField CapTerm (eps/rho_s*PcCoeff*Solid*fvc::grad(alpha1)); 
+volVectorField CapTerm1  (eps/rho_s*Solid*PcCoeff1*(fvc::grad(pc)+(rho1-rho2)*g));
+volVectorField CapTerm2  (-epss/rho_s*Solid*PcCoeff2*fvc::grad(alpha1));
 
 //Calculating Displacement
 
@@ -44,7 +46,8 @@ volVectorField CapTerm (eps/rho_s*PcCoeff*Solid*fvc::grad(alpha1));
                     - fvc::Sp(epss*eps*Drag/rho_s, Us)
 
                     //Capillary Pressure Source
-                    - CapTerm                   
+                    - CapTerm1
+		    - CapTerm2                   
 
                     //Explicit Part of Stress Tensor
                     + epss*divSigmaExp 

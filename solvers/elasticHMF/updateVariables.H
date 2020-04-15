@@ -39,14 +39,6 @@ DragF = (1-Solid)*invFk0*mixture.nu()*rho;
 // Updating Capillary Pressure Model
 myCapModel().correct();
 pc = myCapModel().pc()*activateCapillarity; 
-dPcdS = myCapModel().dpcdS()*activateCapillarity; 
-PcCoeff = (  
-	-pc
-	+(1./M)*(M1*(1.-alpha1) - M2*(alpha1))*dPcdS
-	);
-
-//pc = myCapModel().pc()*activateCapillarity; 
 //dPcdS = myCapModel().dpcdS()*activateCapillarity; 
-//PcCoeff = dPcdS;
-
-//Maybe add eps = 1-epss here but we have checked before
+PcCoeff1 = (1./M)*(M1*(1.-alpha1) - M2*(alpha1));
+PcCoeff2 = pc;

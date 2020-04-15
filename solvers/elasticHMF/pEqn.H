@@ -12,7 +12,7 @@
     adjustPhi(phiHbyA, U, p);
 
     //Test border attenuation
-    volScalarField PcCoeff2 (PcCoeff);
+    //volScalarField PcCoeffTest (PcCoeff1);
     //volVectorField SolidBorder = fvc::grad(mag(fvc::grad(Solid)));
     
     volVectorField SolidBorder = fvc::grad(Solid);
@@ -24,16 +24,20 @@
 
     // Gravity Contribution
     surfaceScalarField phiG 
-    (
-       rAUf*fvc::interpolate(rho)*(g & mesh.Sf())
+    ( 
+	(
+          fvc::interpolate(rho)                  
+        + fvc::interpolate(PcCoeff1*(rho1-rho2))*Solidf
+       )*rAUf*(g & mesh.Sf())
     );
 
     // Interfacial Force Contributions
     surfaceScalarField phiPc
     (
-        (
-            mixture.surfaceTensionForce()*(1.-Solidf) //activate free fluid interface model
-	 +  fvc::interpolate(PcCoeff2)*fvc::snGrad(alpha1)*Solidf //activate porous media model
+       (
+          mixture.surfaceTensionForce()*(1.-Solidf) //activate free fluid interface model   
+       +  fvc::interpolate(PcCoeff1)*fvc::snGrad(pc)*Solidf //activate porous media models
+       -  fvc::interpolate(PcCoeff2)*fvc::snGrad(alpha1)*Solidf
         )*rAUf*mesh.magSf()
     );
 
