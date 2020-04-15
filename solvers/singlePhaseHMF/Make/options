@@ -14,4 +14,10 @@ EXE_LIBS = \
     -lfiniteVolume \
     -lmeshTools \
     -lfvOptions \
-    -lsampling
+    -lsampling \
+    -L$(FOAM_USER_LIBBIN) \
+    -lporousImmiscibleIncompressibleTwoPhaseMixture \
+    -lporousModels \
+    -lporousInterfaceProperties \
+    -lSpearmanQuemada \
+    -lHerschelBulkleyQuemada

@@ -5,7 +5,10 @@ volVectorField Terzaghi = -(epss/rho_s)*fvc::grad(p);
 
 //Calculating Explicit Capillary Interaction force
 //volVectorField CapTerm (eps/rho_s*(mixture.sigmaK()*(1-Solid) + PcCoeff*Solid)*fvc::grad(alpha1)); 
-volVectorField CapTerm (eps/rho_s*PcCoeff*Solid*fvc::grad(alpha1)); //this is definitly alpha1, just look at zhang tets *pcAlpha1 examples. 
+volVectorField CapTerm1  (eps/rho_s*Solid*PcCoeff1*(fvc::grad(pc)+(rho1-rho2)*g));
+volVectorField CapTerm2  (-epss/rho_s*Solid*PcCoeff2*fvc::grad(alpha1));  
+
+ //this is definitly alpha1, just look at zhang tets *pcAlpha1 examples. 
 
 fvVectorMatrix UsEqn
 	(
@@ -28,7 +31,8 @@ fvVectorMatrix UsEqn
       - epss*g 
 
 	//Capillary presure source
-      + CapTerm 
+      + CapTerm1
+      + CapTerm2 
    
 	//Momentum Source from fluid to solid
       - fvc::Sp(eps*Drag/rho_s, U) 
