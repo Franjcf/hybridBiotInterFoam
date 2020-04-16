@@ -30,7 +30,7 @@
             (
                 (
 		    mixture.surfaceTensionForce()*(1.-Solidf) 
-	          + fvc::interpolate(PcCoeffFluid)*fvc::snGrad(alpha1)*Solidf 
+	          + fvc::interpolate(PcCoeff*dPcdS-pc)*fvc::snGrad(alpha1)*Solidf 
                   - fvc::snGrad(p)
                 ) * mesh.magSf()
 		+fvc::interpolate(rho)*(g & mesh.Sf())

@@ -33,7 +33,7 @@
     (
         (
             mixture.surfaceTensionForce()*(1.-Solidf) //activate free fluid interface model
-	 +  fvc::interpolate(PcCoeffFluid)*fvc::snGrad(alpha1)*Solidf //activate porous media model
+	 +  fvc::interpolate(PcCoeff*dPcdS-pc)*fvc::snGrad(alpha1)*Solidf //activate porous media model
         )*rAUf*mesh.magSf()
     );
 

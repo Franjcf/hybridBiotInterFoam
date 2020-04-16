@@ -53,8 +53,7 @@ scalar activateCapillarity(transportProperties.lookupOrDefault<scalar>("activate
 myCapModel().correct();
 volScalarField pc("pc",myCapModel().pc()*activateCapillarity);
 volScalarField dPcdS("dPcdS",myCapModel().dpcdS()*activateCapillarity);
-volScalarField PcCoeffFluid("PcCoeffFluid", (1./M)*(M1*(1.-alpha1) - M2*alpha1)*dPcdS - pc);
-volVectorField PcCoeffSolid("PcCoeffSolid", (1./M)*(M1*(1.-alpha1) - M2*alpha1)*(rho1-rho2)*g);
+volScalarField PcCoeff("PcCoeff", (1./M)*(M1*(1.-alpha1) - M2*alpha1));
 
 Info<< "Initializing Relative Velocity Field Ur\n" << endl;
 volVectorField Ur

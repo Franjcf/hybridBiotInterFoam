@@ -40,6 +40,5 @@ DragF = (1-Solid)*invFk0*mixture.nu()*rho;
 myCapModel().correct();
 pc = myCapModel().pc()*activateCapillarity; 
 dPcdS = myCapModel().dpcdS()*activateCapillarity; 
-PcCoeffFluid = (1./M)*(M1*(1.-alpha1) - M2*(alpha1))*dPcdS -pc;
-PcCoeffSolid = (1./M)*(M1*(1.-alpha1) - M2*alpha1)*(rho1-rho2)*g;           
+PcCoeff = (1./M)*(M1*(1.-alpha1) - M2*(alpha1));          
 
