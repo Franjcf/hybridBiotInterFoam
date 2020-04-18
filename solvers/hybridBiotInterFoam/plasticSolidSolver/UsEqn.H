@@ -8,8 +8,9 @@ volVectorField Terzaghi = -(epss/rho_s)*fvc::grad(p);
 volVectorField CapTerm ((Solid/rho_s)*
                          (
 			   (eps*PcCoeff*dPcdS + epss*pc)*fvc::grad(alpha1)
+			   //may be + epss*pc
                          +
-                           eps*PcCoeff*(rho1-rho2)*g  
+                            eps*PcCoeff*(rho1-rho2)*g  
                          )
                        );
 // it should be + pc in Cap Term 2 
