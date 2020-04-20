@@ -1,0 +1,6 @@
+
+1) add automated compilation proccedures
+2) finish setting up the tutorial cases running procedures
+3) clean old cases once ready to submit (put them somewhere else)
+4) if need to change names do the following code:
+	find . -type f | xargs sed -i  's/solidHMF/plasticHBIF/g'
