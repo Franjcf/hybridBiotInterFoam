@@ -15,14 +15,14 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-application     interFoam;
+application     plasticHBIF;
 
 startFrom       latestTime;
 
 startTime       0;
 
-stopAt          //writeNow;
-		endTime;
+stopAt          writeNow;
+		//endTime;
 
 endTime         250;
 

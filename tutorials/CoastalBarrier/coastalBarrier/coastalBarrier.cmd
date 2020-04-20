@@ -12,5 +12,5 @@
 # Load openmpi environment
 module load openmpi/gcc
 
-srun elasticHMF -parallel 2>&1 1>log
+srun elasticHBIF -parallel 2>&1 1>log
 

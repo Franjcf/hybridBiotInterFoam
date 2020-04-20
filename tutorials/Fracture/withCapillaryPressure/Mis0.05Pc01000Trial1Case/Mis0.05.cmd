@@ -11,4 +11,4 @@
 # Load openmpi environment
 module load openmpi/gcc
 
-srun solidHMF -parallel 2>&1 1>log
+srun plasticHBIF -parallel 2>&1 1>log
