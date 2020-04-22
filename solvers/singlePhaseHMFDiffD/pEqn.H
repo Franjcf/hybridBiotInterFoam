@@ -33,7 +33,7 @@ while (pimple.correctNonOrthogonal())
     // Pressure corrector
     fvScalarMatrix pEqn
     (
-        fvm::laplacian(rAtU(), p) == fvc::div(phiHbyA) - fvc::ddt(epss)
+        fvm::laplacian(rAtU(), p) == fvc::div(phiHbyA) + fvc::ddt(eps)
     );
 
     pEqn.setReference(pRefCell, pRefValue);
