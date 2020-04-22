@@ -1,3 +1,5 @@
+derivedFvPatchFields/tractionDisplacement/tractionDisplacementFvPatchVectorField.C
+derivedFvPatchFields/hydrostaticDisplacement/hydrostaticDisplacementFvPatchVectorField.C
 elasticHBIF.C
 
 EXE = $(FOAM_USER_APPBIN)/elasticHBIF
