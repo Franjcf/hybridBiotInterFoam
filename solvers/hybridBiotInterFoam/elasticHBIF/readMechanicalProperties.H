@@ -19,7 +19,7 @@
 
     IOobject rhoIO
     (
-        "rho",
+        "rho_s",
         runTime.timeName(0),
         mesh,
         IOobject::NO_READ,
@@ -38,7 +38,7 @@
                 mesh,
                 dimensionedScalar
                 (
-                    "rho",
+                    "rho_s",
                     dimMass/dimVolume,
                     rhoValue
                 )

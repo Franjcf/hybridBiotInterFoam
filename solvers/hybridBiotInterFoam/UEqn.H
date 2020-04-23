@@ -11,7 +11,7 @@
       + fvm::Sp(Drag,U) 
 
         //Explicit part of the Darcy-Brinkman Drag Term
-      - fvc::Sp(epss*Drag,Us) 
+      //- fvc::Sp(epss*Drag,Us) 
 
         //2.5 D term from A. Ferrari 2015
       + fvm::Sp(DragF,U)

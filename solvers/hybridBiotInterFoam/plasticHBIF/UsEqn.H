@@ -4,16 +4,13 @@ Info<< "\nCalculating Us" << endl;
 volVectorField Terzaghi = -(epss/rho_s)*fvc::grad(p);
 
 //Calculating Explicit Capillary Interaction force
-//volVectorField CapTerm (eps/rho_s*(mixture.sigmaK()*(1-Solid) + PcCoeff*Solid)*fvc::grad(alpha1)); 
 volVectorField CapTerm ((Solid/rho_s)*
                          (
 			   (eps*PcCoeff*dPcdS + epss*pc)*fvc::grad(alpha1)
-			   //may be + epss*pc
                          +
                             eps*PcCoeff*(rho1-rho2)*g  
                          )
-                       );
-// it should be + pc in Cap Term 2 
+                       ); 
 
 fvVectorMatrix UsEqn
 	(
@@ -23,10 +20,8 @@ fvVectorMatrix UsEqn
 
       + fvm::div(phisEpss,Us)
 	
-	//Viscouus terms: div(mu grad(U*epss)) 
+	//Viscous terms:  
       - fvm::laplacian(solid.nu(),Us)
-
-	//U Transpose viscocity term 
       - fvc::div(solid.nu()*dev2(T(fvc::grad(Us))))
       
         //Terzaghi Term

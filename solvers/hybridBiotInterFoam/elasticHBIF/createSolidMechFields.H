@@ -98,8 +98,6 @@ volVectorField divSigmaExp
     fvc::div(sigmaD)
 );
 
-//Switch compactNormalStress(stressControl.lookup("compactNormalStress"));
-
 if (compactNormalStress)
 {
     divSigmaExp -= fvc::laplacian((2*mu + lambda), D, "laplacian(DD,D)");

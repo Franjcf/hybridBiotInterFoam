@@ -144,9 +144,11 @@ void Foam::tractionDisplacementFvPatchVectorField::updateCoeffs()
     const dictionary& thermalProperties =
         db().lookupObject<IOdictionary>("thermalProperties");
 
+    //const fvPatchField<scalar>& epss =
+    //    patch().lookupPatchField<volScalarField, scalar>("epss");//*
 
     const fvPatchField<scalar>& rho =
-        patch().lookupPatchField<volScalarField, scalar>("rho");
+        patch().lookupPatchField<volScalarField, scalar>("rho_s");//*
 
     const fvPatchField<scalar>& rhoE =
         patch().lookupPatchField<volScalarField, scalar>("E");
@@ -177,7 +179,7 @@ void Foam::tractionDisplacementFvPatchVectorField::updateCoeffs()
     gradient() =
     (
         (traction_ - pressure_*n)/rho
-      + twoMuLambda*fvPatchField<vector>::snGrad() - (n & sigmaD)
+      + twoMuLambda*fvPatchField<vector>::snGrad() - (n & sigmaD) //*
     )/twoMuLambda;
 
     Switch thermalStress(thermalProperties.lookup("thermalStress"));

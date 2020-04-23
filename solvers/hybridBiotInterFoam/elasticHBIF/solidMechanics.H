@@ -64,9 +64,6 @@ volVectorField CapTerm ((Solid/rho_s)*
                     DEqn += fvc::grad(threeKalpha*T);
                 }
 
-                //DEqn.setComponentReference(1, 0, vector::X, 0);
-                //DEqn.setComponentReference(1, 0, vector::Z, 0);
-
                 initialResidual = DEqn.solve().max().initialResidual();
 
                 if (!compactNormalStress)
