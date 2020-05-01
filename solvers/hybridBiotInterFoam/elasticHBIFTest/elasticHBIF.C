@@ -136,7 +136,7 @@ int main(int argc, char *argv[])
             // --- Pressure corrector loop
             while (pimple.correct())
             {
-                #include "pEqnddtEpss.H"
+                #include "pEqn.H"
             }
         }
 

@@ -1,5 +1,7 @@
 // Updating Relative Permeability Model
-k0 = K*(1-epss)*(1-epss)*(1-epss)/max(epss*epss,SMALL);
+
+if (useKozenyCarman == 1)
+{k0 = K*(1-epss)*(1-epss)*(1-epss)/max(epss*epss,SMALL);}
 
 krModel->correct();
 kr1=krModel->krb();

@@ -204,11 +204,12 @@
 
     for (int aCorr=0; aCorr<nAlphaCorr; aCorr++)
     {  
-        surfaceScalarField phir((1.-Solidf)*phic*mixture.nHatf());        
-       
-        if (activateUr == 1.)
-	{phir += Solidf*phirPore;}
-
+           
+        surfaceScalarField phir(
+                           (1.-Solidf)*phic*mixture.nHatf()
+                           + Solidf*phirPore
+                           );
+        
         tmp<surfaceScalarField> talphaPhiUn
         (
             fvc::flux

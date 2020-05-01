@@ -44,14 +44,14 @@ volVectorField CapTerm ((Solid/rho_s)*
 		    + Terzaghi
 
 		    //Gravity Term
-		    + epss*g
+//		    + epss*g
 
                     //Transport Momentum Source 
-                    + fvc::Sp(eps*Drag/rho_s, U)
-                   // - fvc::Sp(epss*eps*Drag/rho_s, Us)
+  //                  + fvc::Sp(eps*Drag/rho_s, U)
+    //                - fvc::Sp(epss*eps*Drag/rho_s, Us)
 
                     //Capillary Pressure Source
-                    - CapTerm                   
+      //              - CapTerm                   
 
                     //Explicit Part of Stress Tensor
                     + epss*divSigmaExp 
@@ -63,9 +63,6 @@ volVectorField CapTerm ((Solid/rho_s)*
                     const volScalarField& T = Tptr();
                     DEqn += fvc::grad(threeKalpha*T);
                 }
-
-                //DEqn.setComponentReference(1, 0, vector::X, 0);
-                //DEqn.setComponentReference(1, 0, vector::Z, 0);
 
                 initialResidual = DEqn.solve().max().initialResidual();
 

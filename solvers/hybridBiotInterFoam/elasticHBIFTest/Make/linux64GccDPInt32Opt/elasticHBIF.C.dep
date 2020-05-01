@@ -37,7 +37,7 @@ $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/alphaControls.H \
 .././alphaEqnSubCycle.H \
 .././updateVariables.H \
 .././UEqn.H \
-.././pEqnddtEpss.H \
+.././pEqn.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/parRun.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/Time.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/fvMesh.H \
@@ -883,7 +883,7 @@ $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/alphaControls.H :
 .././alphaEqnSubCycle.H :
 .././updateVariables.H :
 .././UEqn.H :
-.././pEqnddtEpss.H :
+.././pEqn.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/parRun.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/Time.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/fvMesh.H :

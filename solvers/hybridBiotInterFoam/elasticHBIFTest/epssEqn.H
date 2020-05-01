@@ -16,5 +16,5 @@ fvScalarMatrix epssEqn
 epssEqn.solve();
 epss.correctBoundaryConditions();
 
-epss.min(0.999);
-epss.max(0);
+epss.min(0.99);
+epss.max(0.01);

@@ -13,7 +13,14 @@ volScalarField K
     ),
     mesh
 );
-volScalarField k0("k0", K*(eps*eps*eps)/(max((1-eps)*(1-eps),SMALL)) ); //Kozeny-Carman
+
+volScalarField k0("k0", K);
+
+scalar useKozenyCarman(transportProperties.lookupOrDefault<scalar>("useKozenyCarman",1));
+
+if (useKozenyCarman == 1)
+{k0 = K*(eps*eps*eps)/(max((1-eps)*(1-eps),SMALL)) ;}
+
 surfaceScalarField k0f("k0f",fvc::interpolate(k0,"k0"));
 
 autoPtr<relativePermeabilityModel> krModel = relativePermeabilityModel::New("krModel",transportProperties,alpha1);
@@ -68,9 +75,6 @@ volVectorField Ur
     ),
     U*0
 );
-
-scalar activateUr(transportProperties.lookupOrDefault<scalar>("activateUr",1.));
-activateUr = activateUr;
 
 // Labeling the places that have porous media
 forAll(epss,celli) 
