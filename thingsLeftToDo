@@ -6,3 +6,4 @@
 	find . -type f | xargs sed -i  's/solidHMF/plasticHBIF/g'
 
 5) make hybridBiotPimpleFoam
+6) add switch for only single-phase flow? (dont solve alpha equation)

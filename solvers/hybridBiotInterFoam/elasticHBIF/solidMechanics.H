@@ -17,7 +17,6 @@ volVectorField CapTerm ((Solid/rho_s)*
                          )
                        );
 
-
 //Calculating Displacement
 
         do
