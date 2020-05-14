@@ -113,8 +113,8 @@ mesh.setFluxRequired(D.name());
 scalar activateSolidMechanics (transportProperties.lookupOrDefault<scalar>("activateSolidMechanics",0.));
 activateSolidMechanics = activateSolidMechanics; //prevents unused variable warning
 
-//scalar pCoeff (transportProperties.lookupOrDefault<scalar>("pCoeff",1.));
-//pCoeff=pCoeff;  
+scalar pCoeff (transportProperties.lookupOrDefault<scalar>("pCoeff",1.));
+pCoeff=pCoeff;  
 
 // Reading Maximum Courant Number for Solid 
 scalar maxCoUs = runTime.controlDict().lookupOrDefault<scalar>("maxCoUs", 1.0);

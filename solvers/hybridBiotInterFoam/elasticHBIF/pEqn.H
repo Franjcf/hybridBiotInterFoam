@@ -37,7 +37,7 @@
     {
         fvScalarMatrix pEqn
         (
-            fvm::laplacian(rAUf, p) ==  fvc::div(phiHbyA) - fvc::ddt(epss) 
+            fvm::laplacian(rAUf, p) ==  fvc::div(phiHbyA) - pCoeff*fvc::ddt(epss) 
         );
 
         pEqn.setReference(pRefCell, getRefCellValue(p, pRefCell));
