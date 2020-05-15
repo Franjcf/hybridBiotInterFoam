@@ -1,0 +1,56 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  plus                                  |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      p;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [1 -1 -2 0 0 0 0];
+
+internalField   uniform 0;
+
+boundaryField
+{
+    leftFace
+    {
+        type            zeroGradient;
+    }
+
+    walls
+    {
+        type            fixedFluxPressure; //zeroGradient;
+    }
+
+    top
+    {
+      type         uniformFixedValue;
+      uniformValue
+      {   //amplitude*sin(2pi*f*t)*scale + level
+          type             sine; 
+          frequency        0.0133; // 1/s
+          amplitude        2000e3; //889e3;
+          scale            1;  // Scale factor for wave
+          level            1;  // Offset
+      }
+    }
+    bottom
+    {
+        type               totalPressure;
+        p0                 uniform 1e3; //900
+    }
+    frontAndBack
+    {
+        type            empty;
+    }
+}
+
+// ************************************************************************* //
