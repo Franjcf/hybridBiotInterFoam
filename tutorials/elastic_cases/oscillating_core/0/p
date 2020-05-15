@@ -9,57 +9,48 @@ FoamFile
 {
     version     2.0;
     format      ascii;
-    class       volVectorField;
-    location    "0";
-    object      D;
+    class       volScalarField;
+    object      p;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [0 1 0 0 0 0 0];
+dimensions      [1 -1 -2 0 0 0 0];
 
-internalField   uniform (0 0 0);
+internalField   uniform 0;
 
 boundaryField
 {
-
-    top
-    {
-        type            tractionDisplacement;
-        traction        uniform (0 0 0);
-        pressure        uniform 1e3; //415e3; //10e3/porosity
-        value           uniform (0 0 0);
-    }
-
     leftFace
     {
-        type            zeroGradient;//fixedValue;
-	value		uniform (0 0 0);
+        type            zeroGradient;
     }
 
     walls
     {
-        type            fixedValue;
-    	value		uniform (0 0 0);
-        
-    //    type            tractionDisplacement;
-    //    traction        uniform (0 0 0);
-    //    pressure        uniform 0;
-    //    value           uniform (0 0 0);
+        type            fixedFluxPressure; 
     }
 
+    top
+    {
+      type         uniformFixedValue;
+      uniformValue
+      {   //amplitude*sin(2pi*f*t)*scale + level
+          type             sine; 
+          frequency        0.0133;
+          amplitude        2000e3; 
+          scale            1;  // Scale factor for wave
+          level            1;  // Offset
+      }
+    }
     bottom
     {
-        type            tractionDisplacement;
-        traction        uniform (0 0 0);
-        pressure        uniform 1e3; //415e3;
-        value           uniform (0 0 0);
+        type               totalPressure;
+        p0                 uniform 1e3; 
     }
-
     frontAndBack
     {
         type            empty;
     }
 }
-
 
 // ************************************************************************* //

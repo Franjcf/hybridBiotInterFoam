@@ -47,7 +47,7 @@ invFk0           [0 -2 0 0 0 0 0]  0; // 12/(b^2)
 alpha.wettingmin           alpha.wettingmin [0  0  0 0 0 0 0] 0;
 alpha.wettingmax           alpha.wettingmax [0  0  0 0 0 0 0] 0.999;
 
-relativePermeabilityModel  VanGenuchten; //BrooksAndCorey;
+relativePermeabilityModel  VanGenuchten; 
 capillarityModel           VanGenuchten;
 
 VanGenuchtenCoeffs
@@ -56,14 +56,6 @@ VanGenuchtenCoeffs
     alpha.wettingmaxpc alpha.wettingmaxpc [0 0 0 0 0 0 0] 0.999;
     pc0 pc0 [1 -1 -2 0 0 0 0] 0; 
     m 0.1;
-}
-
-BrooksAndCoreyCoeffs
-{
-    alpha.wettingminpc alpha.wettingminpc [0 0 0 0 0 0 0] 0;
-    alpha.wettingmaxpc alpha.wettingmaxpc [0 0 0 0 0 0 0] 0.999;
-    pc0 pc0 [1 -1 -2 0 0 0 0] 0;
-    n 2;
 }
  
 // ************************************************************************* //
