@@ -5,3 +5,4 @@
 	find . -type f | xargs sed -i  's/solidHMF/plasticHBIF/g'
 5) make hybridBiotPimpleFoam
 6) add switch for only single-phase flow? (i.e. dont solve alpha equation)
+7) fix .cmd files to not include my email or bad comments (also in hybridPorousInterFoam)

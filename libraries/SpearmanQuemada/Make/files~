@@ -1,2 +1,0 @@
-HerschelBulkleyQuemada.C
-LIB = $(FOAM_USER_LIBBIN)/libuserHerschelBulkleyQuemada

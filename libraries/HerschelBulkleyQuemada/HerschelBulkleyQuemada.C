@@ -54,21 +54,15 @@ Foam::viscosityModels::HerschelBulkleyQuemada::calcNu() const
     dimensionedScalar rtone("rtone", dimless/dimTime, 1.0);
 
     tmp<volScalarField> sr(strainRate());
-    //const volScalarField& epssEff =
-    //U_.mesh().lookupObject<volScalarField>("epssEff"); //epss or epssEff
     volScalarField epssStar = U_.mesh().lookupObject<volScalarField>("epss"); 
-    //epss or epssEff
 
-epssStar.min((epssMax_.value()-0.01)); //0.01
-epssStar.max(0.01); //0.01
-
-//Creating Tau and nuf Fields
+epssStar.min((epssMax_.value()-0.01)); 
+epssStar.max(0.01); 
 
 volScalarField Tau0 = tau0_*pow( (epssStar/epssMax_) / max((1-epssStar/epssMax_),SMALL ),  Dstar_ ); 
 
 volScalarField nufInf = (nuf_/pow(max(SMALL,(1-epssStar/epssMax_)),2));
 
-//calculating the viscosity values
 return
     (
         min
@@ -79,11 +73,6 @@ return
         )
     );
 }
-
-//where tau0_ is the critical stress constant and nuf_ is the viscosity of water
-//Following Spearman paper:
-//epssEffMax is the maximum effective solid fraction, D is a fractal dimension constant
-
 
 // * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
 
@@ -146,14 +135,3 @@ bool Foam::viscosityModels::HerschelBulkleyQuemada::read
 
 // ************************************************************************* //
 
-//other stuff
-//min
-        //(
-           // nu0_,
-            //(
-            //max(
-	//	tauMin_, tau0_*pow((epssEff/epssEffMax_)/(1-epssEff/epssEffMax_),Dstar_)
-	 //      )
-         //   + (k_/pow((1-epssEff/epssEffMax_),2))*rtone*pow(tone*sr(), n_)
-         //   )
-         //  /(max(sr(), dimensionedScalar ("VSMALL", dimless/dimTime, VSMALL)))

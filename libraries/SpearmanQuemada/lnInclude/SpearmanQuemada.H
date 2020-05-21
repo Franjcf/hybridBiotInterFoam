@@ -1,1 +1,0 @@
-../SpearmanQuemada.H
