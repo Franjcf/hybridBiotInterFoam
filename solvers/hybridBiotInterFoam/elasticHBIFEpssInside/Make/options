@@ -20,5 +20,4 @@ EXE_LIBS = \
     -lporousImmiscibleIncompressibleTwoPhaseMixture \
     -lporousModels \
     -lporousInterfaceProperties \
-    -lSpearmanQuemada \
     -lHerschelBulkleyQuemada
