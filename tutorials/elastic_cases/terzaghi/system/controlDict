@@ -15,7 +15,7 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-application     hybridBiotInterFoam;
+application     elasticHBIF;
 
 startFrom       latestTime;
 
@@ -49,7 +49,6 @@ adjustTimeStep  yes;
 
 maxCo           50;
 maxAlphaCo      50;
-
 maxDeltaT       5;
 
 // ************************************************************************* //

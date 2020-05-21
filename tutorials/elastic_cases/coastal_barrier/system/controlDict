@@ -21,7 +21,7 @@ startFrom       latestTime;
 
 startTime       0;
 
-stopAt          endTime;
+stopAt          writeNow; //endTime;
 
 endTime         20;
 
@@ -49,7 +49,6 @@ adjustTimeStep  yes;
 
 maxCo           0.15;
 maxAlphaCo      0.15;
-
 maxDeltaT       1e-1;
 
 

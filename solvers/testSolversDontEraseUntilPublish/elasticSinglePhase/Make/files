@@ -1,4 +1,0 @@
-tractionDisplacement/tractionDisplacementFvPatchVectorField.C
-solidPMDRxn.C
-
-EXE = $(FOAM_USER_APPBIN)/solidPMDRxn

@@ -1,8 +1,6 @@
-1) add automated compilation proccedures
-2) finish setting up the tutorial cases running procedures
-3) clean old cases once ready to submit, make a new directory and save this one for our archiving purposes
-4) if need to change names do the following code:
+if need to change names do the following code:
 	find . -type f | xargs sed -i  's/solidHMF/plasticHBIF/g'
-5) make hybridBiotPimpleFoam
-6) add switch for only single-phase flow? (i.e. dont solve alpha equation)
-7) fix .cmd files to not include my email or bad comments (also in hybridPorousInterFoam)
+
+
+1) make hybridBiotPimpleFoam
+	add switch for only single-phase flow? (i.e. dont solve alpha equation)

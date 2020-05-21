@@ -29,7 +29,7 @@ class testCase:
     def run(self):
 
         print ""
-        print "Test : " +self.solver + self.category + " " + self.case
+        print "Test : " + self.solver + " "  + self.category + " " + self.case
         print ""
 
         refDir=os.getcwd()

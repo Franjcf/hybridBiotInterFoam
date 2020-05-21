@@ -1,0 +1,10 @@
+Before doing anything: 
+
+Make sure you have epssBound and the GaussionMapping.m files (included in this directory).
+
+The epssBound file contains the  boundary conditions for the fracturing case,
+but you can modify it to your liking and the conditions you need.
+
+Run the Matlab script, this will create a clean epss (solid fraction) file which then you can copy
+into the 0/ directory within your simulations.
+  

@@ -1,8 +1,8 @@
 /*--------------------------------*- C++ -*----------------------------------*\
 | =========                 |                                                 |
 | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
-|  \\    /   O peration     | Version:  plus                                  |
-|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|  \\    /   O peration     | Version:  4.1                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
 |    \\/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
 FoamFile
@@ -15,7 +15,7 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-application     elasticHBIF;
+application     plasticHBIF;
 
 startFrom       latestTime;
 
@@ -23,13 +23,13 @@ startTime       0;
 
 stopAt          writeNow; //endTime;
 
-endTime         200;
+endTime         150;
 
-deltaT          50;
+deltaT          1e-7;
 
-writeControl    adjustableRunTime;
+writeControl    adjustableRunTime; //timeStep
 
-writeInterval   1;//5e-4;
+writeInterval   2.5;
 
 purgeWrite      0;
 
@@ -47,11 +47,9 @@ runTimeModifiable yes;
 
 adjustTimeStep  yes;
 
-maxCo           1;//0.15;
-maxAlphaCo      1;//0.15;
-//maxCoUs		0.1;
-
-maxDeltaT       0.01;
-
+maxCo           0.25;
+maxCoUs		0.25;
+maxAlphaCo      0.25;
+maxDeltaT       0.05;
 
 // ************************************************************************* //
