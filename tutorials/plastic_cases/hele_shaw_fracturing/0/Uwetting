@@ -40,27 +40,23 @@ boundaryField
 
     upperInlet
     {
-        //type            zeroGradient;
 	type            fixedValue;
         value           uniform (0 2.6e-2 0);
     }
     lowerInlet
     {
-	//type            zeroGradient;
        type            fixedValue;
        value           uniform (0 -2.6e-2 0);
     }
     rightInlet
     {
-	//type            zeroGradient;
-         type            fixedValue;
-         value           uniform (2.6e-2 0 0);
+        type            fixedValue;
+        value           uniform (2.6e-2 0 0);
     }
     leftInlet
     {
-	//type            zeroGradient;
         type            fixedValue;
-        value           uniform (-2.6e-2 0 0);  //2.6e-3,1.3e-2,6.5e-2 
+        value           uniform (-2.6e-2 0 0);   
     }
 
 }

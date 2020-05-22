@@ -25,13 +25,11 @@ boundaryField
     top
     {
         type            zeroGradient;
-        value           uniform (0 0 0);
     }
 
     leftFace
     {
-        type            zeroGradient;//fixedValue;
-	value		uniform (0 0 0);
+        type            zeroGradient;
     }
 
     rightFace

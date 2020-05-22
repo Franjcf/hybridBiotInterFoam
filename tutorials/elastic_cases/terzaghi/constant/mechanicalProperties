@@ -32,8 +32,7 @@ E
     type        uniform;
     value       2000e3;
 }
-
-//determines if we only take into account 2D stresses 
+ 
 planeStress     no; 
 
 

@@ -27,7 +27,7 @@ boundaryField
 
     rightFace
     {
-        type            fixedFluxPressure; //zeroGradient;
+        type            fixedFluxPressure; 
     }
 
     bottom

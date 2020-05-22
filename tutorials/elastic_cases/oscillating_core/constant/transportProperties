@@ -33,7 +33,6 @@ nonWetting
 
 //Solid Phase 
 activateSolidMechanics 1;    
-useKozenyCarman 0;
 
 //Two Phase 
 activateCapillarity            0;
@@ -42,7 +41,7 @@ activatePorousContactAngle     0;
 theta0                         180;
 
 sigma            [1 0 -2 0 0 0 0]  0.077;
-invFk0           [0 -2 0 0 0 0 0]  0; // 12/(b^2)
+invFk0           [0 -2 0 0 0 0 0]  0; 
 
 alpha.wettingmin           alpha.wettingmin [0  0  0 0 0 0 0] 0;
 alpha.wettingmax           alpha.wettingmax [0  0  0 0 0 0 0] 0.999;
@@ -57,5 +56,7 @@ VanGenuchtenCoeffs
     pc0 pc0 [1 -1 -2 0 0 0 0] 0; 
     m 0.1;
 }
+
+useKozenyCarman 0;
  
 // ************************************************************************* //

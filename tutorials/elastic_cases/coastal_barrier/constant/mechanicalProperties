@@ -33,7 +33,6 @@ E
     value       5e9;
 }
 
-//determines if we only take into account 2D stresses 
 planeStress     no; 
 
 

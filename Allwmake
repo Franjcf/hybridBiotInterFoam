@@ -8,4 +8,4 @@ wmake libso libraries/porousTwoPhaseProperties/
 wmake libso libraries/porousImmiscibleIncompressibleTwoPhaseMixture/
 wmake libso libraries/HerschelBulkleyQuemada/
 wmake all libraries/porousModels
-wmake all solvers/hybridBiotInterFoam
+wmake all solvers

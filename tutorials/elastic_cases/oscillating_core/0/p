@@ -32,14 +32,14 @@ boundaryField
 
     top
     {
-      type         uniformFixedValue;
+      type              uniformFixedValue;
       uniformValue
-      {   //amplitude*sin(2pi*f*t)*scale + level
+      {   
           type             sine; 
           frequency        0.0133;
           amplitude        2000e3; 
-          scale            1;  // Scale factor for wave
-          level            1;  // Offset
+          scale            1;  
+          level            1;  
       }
     }
     bottom

@@ -8,11 +8,9 @@
 
 inletFlowRatePos      2.6e-2;
 inletFlowRateNeg     -2.6e-2;
-inPressure           0;     //0 with fixedFluxPressure, X with totalPressure
-velocityBC           fixedValue; //pressureInletVelocity 
-porousVelocityBC     slip; //zeroGradient
-pressureBC 	     fixedFluxPressure; // totalPressure;
-
-
+inPressure           0;    
+velocityBC           fixedValue; 
+porousVelocityBC     slip; 
+pressureBC 	     fixedFluxPressure;
 
 // ************************************************************************* //

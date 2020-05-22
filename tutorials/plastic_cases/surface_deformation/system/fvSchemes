@@ -22,14 +22,14 @@ ddtSchemes
 
 gradSchemes
 {
-    default         Gauss linear 1;
+    default         Gauss linear;
 }
 
 divSchemes
 {
     //Fluid Schemes
     div(rhoPhiByEps,U)  Gauss linearUpwind grad(U);
-    div(phi,alpha)  Gauss linearUpwind grad(U);//vanLeer01;
+    div(phi,alpha)  Gauss linearUpwind grad(U);
     div(phirb,alpha) bounded Gauss upwind;
     div(((rho*nu)*dev2(T(grad(U))))) Gauss linear;
 
@@ -53,8 +53,5 @@ snGradSchemes
 {
     default         orthogonal; //corrected if non orthogonal
 }
-
-//fluxRequired {p}
-
 
 // ************************************************************************* //

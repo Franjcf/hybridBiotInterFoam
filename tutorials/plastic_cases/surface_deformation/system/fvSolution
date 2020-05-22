@@ -21,7 +21,7 @@ solvers
     {
         nAlphaCorr      1;
         nAlphaSubCycles 3; 
-        cAlpha          1; //compression term 
+        cAlpha          1;
 
         MULESCorr       yes;
         nLimiterIter    3;
@@ -46,7 +46,7 @@ solvers
         relTol          0;
     }
 
-    "(p_rgh|p)"
+    p
     {
         solver          GAMG;
         tolerance       1e-06;
@@ -54,13 +54,13 @@ solvers
 	smoother        GaussSeidel;
     }
 
-    "(p_rgh|p)Final"
+    pFinal
     {
-        $p_rgh;
+        $p;
         relTol          0;
     }
 
-   "(U|Up|Us|k|epsilon|omega|f|v2)"
+   "(U|Us)"
     {
         solver          smoothSolver;
         smoother        symGaussSeidel;
@@ -69,23 +69,9 @@ solvers
 	maxIter         1000;
     }
 
-    "(U|Up|Us|k|epsilon)Final"
+    "(U|Us)Final"
     {
         $U;
-        relTol          0;
-    }
-
-  C
-    {
-        solver          smoothSolver;
-	smoother        GaussSeidel;
-        tolerance       1e-06;
-        relTol          0.1;
-    }    
-
-    CFinal
-    {
-        $C;
         relTol          0;
     }
 

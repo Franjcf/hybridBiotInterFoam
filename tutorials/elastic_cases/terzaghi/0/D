@@ -26,25 +26,19 @@ boundaryField
     {
         type            tractionDisplacement;
         traction        uniform (0 0 0);
-        pressure        uniform 100e3; //10e3/porosity
+        pressure        uniform 100e3;
         value           uniform (0 0 0);
     }
 
     leftFace
     {
-        type            zeroGradient;//fixedValue;
-	value		uniform (0 0 0);
+        type            zeroGradient;
     }
 
     walls
     {
         type            fixedValue;
     	value		uniform (0 0 0);
-        
-    //    type            tractionDisplacement;
-    //    traction        uniform (0 0 0);
-    //    pressure        uniform 0;
-    //    value           uniform (0 0 0);
     }
 
     bottom

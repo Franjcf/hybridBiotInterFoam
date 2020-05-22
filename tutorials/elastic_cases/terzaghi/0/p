@@ -27,7 +27,7 @@ boundaryField
 
     walls
     {
-        type            fixedFluxPressure; //zeroGradient;
+        type            fixedFluxPressure; 
     }
 
     bottom

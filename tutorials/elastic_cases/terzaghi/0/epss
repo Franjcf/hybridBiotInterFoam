@@ -33,8 +33,10 @@ boundaryField
     {
         type            zeroGradient;
     }
-    walls
-	{type 	zeroGradient;}
+    walls 
+    {
+        type	 	zeroGradient; 
+    }
 
 }
 

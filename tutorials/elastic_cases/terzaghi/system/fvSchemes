@@ -39,12 +39,8 @@ divSchemes
     div(((rho*nu)*dev2(T(grad(U))))) Gauss linear;
 
     //Solid Schemes
-    div(phisEpss,Us)             Gauss linearUpwind grad(Us);
-    div((nu*dev2(T(grad(Us)))))  Gauss linear;
-    div(phis,epss)               Gauss upwind;//;vanLeer01;//linearUpwind grad(epss);
-    
-    div(sigmaD)                  Gauss linear;//linear;
-    div((nus*ddt(Strain)))       Gauss linear;
+    div(phis,epss)               Gauss upwind;
+    div(sigmaD)                  Gauss linear;
 
 }
 
@@ -62,8 +58,5 @@ snGradSchemes
 {
     default         orthogonal; //corrected if non orthogonal
 }
-
-//fluxRequired {p}
-
 
 // ************************************************************************* //

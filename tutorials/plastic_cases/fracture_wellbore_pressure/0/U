@@ -33,16 +33,12 @@ boundaryField
     }
     walls
     {
-       // type            zeroGradient;
-
         type            inletOutlet;
         value           $internalField;
         inletValue      uniform (0 0 0);
     }
     walls2
-    {
-        //type            zeroGradient;
-        
+    {  
 	type            inletOutlet;
         value           $internalField;
         inletValue      uniform (0 0 0);
@@ -55,13 +51,13 @@ boundaryField
     }
     lowerInlet
     {
-       type            $velocityBC;
-       value           uniform (0 $inletFlowRateNeg 0);
+       type             $velocityBC;
+       value            uniform (0 $inletFlowRateNeg 0);
     }
     rightInlet
     {
-	 type            $velocityBC;
-         value           uniform ($inletFlowRatePos 0 0);
+	type            $velocityBC;
+        value           uniform ($inletFlowRatePos 0 0);
     }
     leftInlet
     {

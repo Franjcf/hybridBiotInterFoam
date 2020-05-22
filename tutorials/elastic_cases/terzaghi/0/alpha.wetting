@@ -26,14 +26,11 @@ boundaryField
     }
     top
     {
-        type            zeroGradient //inletOutlet;
-        inletValue      uniform 0.5;
-        value           uniform 0.5;
+        type            zeroGradient;
     }
     bottom
     {
-        type            zeroGradient; //fixedValue;
-	value		uniform 0.5;
+        type            zeroGradient; 
     }
     walls
     {

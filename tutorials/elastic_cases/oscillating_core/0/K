@@ -15,9 +15,8 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 dimensions      [0 2 0 0 0 0 0];
-
-//5e-14 = 50mD, 0.322^3/0.678^2 = 0.0726 
-internalField   uniform 1.1e-11; //this times above should give 1e-10
+ 
+internalField   uniform 1.1e-11;
 
 boundaryField
 {
