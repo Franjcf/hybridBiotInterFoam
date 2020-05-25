@@ -1,7 +1,5 @@
 if need to change names do the following code:
 	find . -type f | xargs sed -i  's/solidHMF/plasticHBIF/g'
 
-0) Update the ReadMe File
-
 1) make hybridBiotPimpleFoam
 	add switch for only single-phase flow? (i.e. dont solve alpha equation)
