@@ -4,7 +4,7 @@ Simulation of Multiphase Flow in Hybrid-Scale Deformable Porous Media
 
 This solver simulates two-phase flow in *deformable* porous media that contains two characteristic length scales: a large scale solid-free domain where flow is solved through the Volume-Of-Fluid Method, and a small scale porous domain where flow is solved through two-phase Darcy's Law and Biot Theory. The solver is able to include wetting and capillary effects at both scales. Both domains are coupled and are solved simultaneously with a single momentum equation and within a single mesh.  
 
-This repository was created by Francisco J. Carrillo and Cyprien Soulaine with the
+This repository was created by Francisco J. Carrillo with the
 support of Ian C. Bourg. 
 
 .. figure:: /images/conceptual.png
@@ -41,9 +41,9 @@ Then, in the main "hybridBiotInterFoam" directory, run:
 
   ./Allwmake
 
-This compiles the libraries "lporousInterfaceProperties.so", "lporousModels.so","lporousTwoPhaseProperties.so", "lporousImmiscibleIncompressibleTwoPhaseMixture.so", and Herschel-Bulkley-Quemada.so in the standard OpenFOAM user directory : $FOAM_USER_LIBBIN;
+This compiles the libraries "lporousInterfaceProperties.so", "lporousModels.so","lporousTwoPhaseProperties.so", "lporousImmiscibleIncompressibleTwoPhaseMixture.so", and "Herschel-Bulkley-Quemada.so" in the standard OpenFOAM user directory: $FOAM_USER_LIBBIN;
 
-The two solver executables "elasticHBIF" and "plasticHBIF" are also compiled in the standard OpenFOAM user directory $FOAM_USER_APPBIN.
+The two solver executables "elasticHBIF" and "plasticHBIF" are also compiled in the standard OpenFOAM user directory $FOAM_USER_APPBIN.The former deals with multiphase flow through and around poroelastic solids, the latter does the same but for poroplastic solids. 
 
 ----------------------------------------------------------------------------
 
@@ -103,7 +103,7 @@ List of Included Cases
 
 **Linear Elastic Cases**
 
-- Test cases related to the verification of the solver for poroelastic porous media. (Terzaghi consolidation problem and pressure-oscillation in poroelastic core).
+- Test cases related to the verification of the solver for poroelastic porous media (Terzaghi consolidation problem and pressure-oscillation in poroelastic core).
 
 .. figure:: /images/poroelastic_oscillation.png 
     :align: right
