@@ -7,14 +7,9 @@ This solver simulates two-phase flow in *deformable* porous media that contains 
 This repository was created by Francisco J. Carrillo and Cyprien Soulaine with the
 support of Ian C. Bourg. 
 
-.. figure:: /figures/conceptual.jpg
+.. figure:: /images/conceptual.png
   
     Conceptual Representation of the Modeling Framework.
-    
-.. image:: /figures/coastal.jpg
-
-
-Calculation of Von Mises Stresses During Wave propagation in Coastal Barriers.
 
 ----------------------------------------------------------------------------
 
@@ -110,7 +105,7 @@ List of Included Cases
 
 - Test cases related to the verification of the solver for poroelastic porous media. (Terzaghi consolidation problem and pressure-oscillation in poroelastic core).
 
-.. figure:: /figures/Darcy.png
+.. figure:: /images/poroelastic_oscillation.png 
     :align: right
     :alt: alternate text
     :figclass: align-right
@@ -121,7 +116,7 @@ List of Included Cases
 
 - Test cases related to the verification of the solver for poroplastic porous media (fracturing in a Hele-Shaw cell and in low-permeability formations).
 
-.. figure:: /figures/FreeFlow.png
+.. figure:: /images/fracturing.png
     :align: right
     :alt: alternate text
     :figclass: align-right
@@ -130,20 +125,14 @@ List of Included Cases
 
 **Example Applications**
 
-- Sample cases that show the multi-scale nature of this solver by simulating systems with a combination of porous and free-fluid regions (wave absorption coastal barriers and fracture-driven surface deformation).
+- Sample cases that show the multi-scale nature of this solver by simulating systems with a combination of porous and free-fluid regions (wave absorption in poroelastic coastal barriers and fracture-driven surface deformation).
 
-
-.. figure:: /figures/coastalBarrier.png
+.. figure:: /images/coastal_barrier.png
     :align: right
     :alt: alternate text
     :figclass: align-right
     
-.. figure:: /figures/fracture.png
-    :align: right
-    :alt: alternate text
-    :figclass: align-right
-    
-.. figure:: /figures/viscousFingering.png
+.. figure:: /images/surface_fracturing.png
     :align: right
     :alt: alternate text
     :figclass: align-right
