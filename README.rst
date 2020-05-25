@@ -2,7 +2,7 @@
 Simulation of Multiphase Flow in Hybrid-Scale Deformable Porous Media
 ================================================================================
 
-This solver simulates two-phase flow in *deformable* porous media that contains two characteristic length scales: a large scale solid-free domain where flow is solved through the Volume-Of-Fluid Method, and a small scale porous domain where flow is solved through two-phase Darcy's Law and Biot Theory. Both domains are coupled and are solved simultaneously with a single momentum equation and within a single mesh.  
+This solver simulates two-phase flow in *deformable* porous media that contains two characteristic length scales: a large scale solid-free domain where flow is solved through the Volume-Of-Fluid Method, and a small scale porous domain where flow is solved through two-phase Darcy's Law and Biot Theory. The solver is able to include wetting and capillary effects at both scales. Both domains are coupled and are solved simultaneously with a single momentum equation and within a single mesh.  
 
 This repository was created by Francisco J. Carrillo and Cyprien Soulaine with the
 support of Ian C. Bourg. 
@@ -14,7 +14,7 @@ support of Ian C. Bourg.
 .. image:: /figures/coastal.jpg
 
 
-Calculation of Von-Miss Stresses During Wave propagation in Coastal Barriers.
+Calculation of Von Mises Stresses During Wave propagation in Coastal Barriers.
 
 ----------------------------------------------------------------------------
 
@@ -24,7 +24,7 @@ Calculation of Von-Miss Stresses During Wave propagation in Coastal Barriers.
 General Information
 ################################################################################
 
-- This toolbox is compatible with OpenFOAM 7.0 and later.
+- This toolbox is compatible with OpenFOAM 7.0
 
 - This toolbox needs only a standard OpenFOAM installation (see www.openfoam.org)
 
@@ -40,15 +40,15 @@ First, make sure to source the OpenFOAM file, as shown in the following example 
 
   source /opt/openfoam7x/etc/bashrc
 
-Then, in the "hybridPorousInterFoam" directory, run: 
+Then, in the main "hybridBiotInterFoam" directory, run: 
 
 .. code-block:: bash
 
   ./Allwmake
 
-This compiles the libraries "lporousInterfaceProperties.so", "lporousModels.so","lporousTwoPhaseProperties.so" and "lporousImmiscibleIncompressibleTwoPhaseMixture.so" in the standard OpenFOAM user directory : $FOAM_USER_LIBBIN;
+This compiles the libraries "lporousInterfaceProperties.so", "lporousModels.so","lporousTwoPhaseProperties.so", "lporousImmiscibleIncompressibleTwoPhaseMixture.so", and Herschel-Bulkley-Quemada.so in the standard OpenFOAM user directory : $FOAM_USER_LIBBIN;
 
-The executable solver "hybridPorousInterFoam" is also compiled in the standard OpenFOAM user directory $FOAM_USER_APPBIN.
+The two solver executables "elasticHBIF" and "plasticHBIF" are also compiled in the standard OpenFOAM user directory $FOAM_USER_APPBIN.
 
 ----------------------------------------------------------------------------
 
@@ -78,11 +78,17 @@ Each tutorial directory contains "run" and "clean" files to test installation an
 
   ./run
 
-or equivalently:
+or equivalently, for linear elastic systems:
 
 .. code-block:: bash
 
-  hybridPorousInterFoam
+  elasticHBIF
+  
+and for plastic systems:
+
+.. code-block:: bash
+
+  plasticHBIF
 
 To clean the directory:
 
@@ -94,15 +100,15 @@ To clean the directory:
 List of Included Cases
 ################################################################################
 
-**Case Template**
+**Case Templates**
 
-- A basic template that includes all the neccesary files to run a succesfull simulation. Each variable within the "0/" directory and the "constant/transportProperties" file is labeled to make it easier to understand 
+- Basic templates that includes all the neccesary files to run a succesfull simulation. Each variable within the "0/" directory and the "constant" directory is labeled to make it easier to understand. There is a template case for elastic and plastic systems. 
 
 ---------------------------------------------------------------------------- 
 
-**Darcy Flow Cases**
+**Linear Elastic Cases**
 
-- Test cases related to the verification of the solver in a domain completely occupied by porous media (Replicatino of the 1-D Buckley-Leverett analytical solution and determination of a capillarity-gravity equilibirum)
+- Test cases related to the verification of the solver for poroelastic porous media. (Terzaghi consolidation problem and pressure-oscillation in poroelastic core).
 
 .. figure:: /figures/Darcy.png
     :align: right
@@ -111,9 +117,9 @@ List of Included Cases
 
 ----------------------------------------------------------------------------
 
-**Free Flow Cases**
+**Plastic Cases**
 
-- Test cases related to the verification of the solver in a domain where there is no porous media or just a porous boundary (capillary-driven flows, contact angle implementations, Bretherton thin film-dynamics)
+- Test cases related to the verification of the solver for poroplastic porous media (fracturing in a Hele-Shaw cell and in low-permeability formations).
 
 .. figure:: /figures/FreeFlow.png
     :align: right
@@ -124,7 +130,7 @@ List of Included Cases
 
 **Example Applications**
 
-- Sample cases that show the multi-scale nature of this solver by simulating systems with a combination of porous and free-fluid regions (fractures, coastal barriers, drainage, imbibition, porous fluid reservoir).
+- Sample cases that show the multi-scale nature of this solver by simulating systems with a combination of porous and free-fluid regions (wave absorption coastal barriers and fracture-driven surface deformation).
 
 
 .. figure:: /figures/coastalBarrier.png
@@ -161,6 +167,12 @@ List of Included Libraries
 **porousTwoPhaseProperties:**
      
 - Defenition of two-phase fluid properties that allows for the use of porousInterfaceProperties
+
+----------------------------------------------------------------------------
+
+**HerschelBulkleyQuemada:**
+     
+- Implementation of the Herschel-Bulkley-Quemada plasticity rheology model
 
 ----------------------------------------------------------------------------
 
