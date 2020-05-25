@@ -124,12 +124,11 @@ int main(int argc, char *argv[])
         // --- Pressure-velocity PIMPLE corrector loop
         while (pimple.loop())
         {
-	   
             #include "alphaControls.H"
             #include "alphaEqnSubCycle.H"
 
             mixture.correct(); 
-	
+  
 	    #include "updateVariables.H"
             #include "UEqn.H"
 
