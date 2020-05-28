@@ -1,38 +1,36 @@
-    fvVectorMatrix UEqn
-    (
-	//Inertial Terms
-        (1/eps)*(fvm::ddt(U) + fvm::div(phiByEps, U) )
+//Fluid Momentum Equation
+
+tmp<fvVectorMatrix> tUEqn 
+(
+	//InertialTerms
+        (1/epsf)*(fvm::ddt(U) + fvm::div(phiByEpsf, U))
 
 	//Viscous Terms
-      - (1/eps)*(fvm::laplacian(nuf,U))
-      - (1/eps)*(fvc::div(nuf*dev2(T(fvc::grad(U)))))
+      - (1/epsf)*(fvm::laplacian(nuf,U))
+      - (1/epsf)*(fvc::div(nuf*dev2(T(fvc::grad(U)))))
+	
+	//Implicit Drag Term
+      + fvm::Sp((nuf*kinv),U) 
 
-	//Implicit part of the Darcy-Brinkman Drag Term
-      + fvm::Sp(Drag,U) 
+	//Explicit Drag Term 
+      - fvc::Sp(epss*nuf*kinv,Us) //epss*epsf
 
-        //Explicit part of the Darcy-Brinkman Drag Term
-      - fvc::Sp(epss*Drag,Us) 
+	//2.5 D term from A. Ferrari 2015
+      + fvm::Sp((nuf*Fkinv),U)
 
-        //2.5 D term from A. Ferrari 2015
-      + fvm::Sp(DragF,U)
+);
 
-    );
+fvVectorMatrix& UEqn = tUEqn.ref();
 
-    phiByEps=fvc::interpolate(1/max(eps,SMALL))*phi;
+phiByEpsf=fvc::interpolate(1/max(epsf,SMALL))*phi;
 
-    UEqn.relax();	
+UEqn.relax();
 
-    if (pimple.momentumPredictor()) 
-    {
-        solve
-        (
-            UEqn
-         ==
-            fvc::reconstruct
-            (
-                (
-                  - fvc::snGrad(p)
-                ) * mesh.magSf()
-            )
-        );
-    }
+fvOptions.constrain(UEqn);
+
+if (pimple.momentumPredictor())
+{
+    solve(UEqn == -fvc::grad(p));
+
+    fvOptions.correct(U);
+}

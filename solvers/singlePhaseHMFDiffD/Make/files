@@ -1,3 +1,0 @@
-singlePhaseHMF.C
-
-EXE = $(FOAM_USER_APPBIN)/singlePhaseHMFDiffD

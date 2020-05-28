@@ -19,6 +19,11 @@ if (pimple.consistent())
     HbyA -= (rAU - rAtU())*fvc::grad(p);
 }
 
+if (pimple.nCorrPiso() <= 1)
+{
+    tUEqn.clear();
+}
+
 // Update the pressure BCs to ensure flux consistency
 constrainPressure(p, U, phiHbyA, rAtU());
 
@@ -28,11 +33,10 @@ while (pimple.correctNonOrthogonal())
     // Pressure corrector
     fvScalarMatrix pEqn
     (
-        fvm::laplacian(rAtU(), p) == fvc::div(phiHbyA) + fvc::ddt(eps)
+        fvm::laplacian(rAtU(), p) == fvc::div(phiHbyA) - fvc::ddt(epss)
     );
 
     pEqn.setReference(pRefCell, pRefValue);
-    //pEqn.solve(mesh.solver(p.select(pimple.finalInnerIter())));
     pEqn.solve();
 
     if (pimple.finalNonOrthogonalIter())
@@ -48,3 +52,4 @@ p.relax();
 
 U = HbyA - rAtU()*fvc::grad(p);
 U.correctBoundaryConditions();
+fvOptions.correct(U);

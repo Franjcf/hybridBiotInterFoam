@@ -45,9 +45,6 @@ volVectorField Us
     fvc::ddt(D)
 );
 
-
-#include "createSurfaceFluxesSolid.H"
-
 autoPtr<volScalarField> Tptr(nullptr);
 
 if (thermalStress)

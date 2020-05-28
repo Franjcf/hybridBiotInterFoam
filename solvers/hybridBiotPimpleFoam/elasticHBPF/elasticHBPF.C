@@ -44,6 +44,7 @@ Description
 #include "subCycle.H"
 #include "singlePhaseTransportModel.H"
 #include "pimpleControl.H"
+#include "fvOptions.H"
 #include "localEulerDdtScheme.H"
 #include "fvcSmooth.H"
 #include "Switch.H"
@@ -61,7 +62,7 @@ int main(int argc, char *argv[])
     #include "createRDeltaT.H"
     #include "initContinuityErrs.H"
     #include "createFields.H"
-	
+    #include "createSolidMechFields.H"	
     //turbulence->validate();
 
     #include "readTimeControls.H"
@@ -75,39 +76,26 @@ int main(int argc, char *argv[])
     while (runTime.run())
     {
         #include "readTimeControls.H"
-
-            if (activateSolidMechanics == 0)
-            {
-            #include "CourantNo.H" 
-            #include "setDeltaT.H"
-	    }
-            if (activateSolidMechanics == 1)
-            { 
-            #include "CourantNo.H"
-            #include "CourantNoUs.H"
-	    #include "setDeltaTUs.H"
-	    }
+        #include "CourantNo.H"
+        #include "courantNoUs.H"
+	#include "setDeltaTUs.H"
 
         runTime++;
 
         Info<< "Time = " << runTime.timeName() << nl << endl;
    
         // --- Solid Mechanics 
-        if (activateSolidMechanics == 1)
-        {
             if(runTime.value() > runTime.startTime().value() + runTime.deltaTValue())
             { 
                 #include "solidMechanics.H"        
                 #include "epssEqn.H"
-                #include "updateSolidVariables.H"
+                #include "updateVariables.H"
             }
-        }
 
         // --- Pressure-velocity PIMPLE corrector loop
         while (pimple.loop())
         {
-	 
-	    #include "updateVariables.H"
+
             #include "UEqn.H"
 
             // --- Pressure corrector loop
@@ -115,6 +103,11 @@ int main(int argc, char *argv[])
             {
                 #include "pEqn.H"
             }
+        }
+
+        if (SolveConvectionEqn.value()==1)
+        {
+        #include "convectionEqn.H" //Scalar Transport
         }
 
         runTime.write();

@@ -1,4 +1,62 @@
-Info<< "Reading field p\n" << endl;
+Info<< "Reading transportProperties\n" << endl;
+IOdictionary transportProperties
+(
+    IOobject
+    (
+        "transportProperties",
+        runTime.constant(),
+        mesh,
+        IOobject::MUST_READ_IF_MODIFIED,
+        IOobject::NO_WRITE
+    )
+);
+
+// Reading Model Parameters //
+Info<< "Reading the fluid's kinematic viscocity 'nuf'\n" << endl;
+dimensionedScalar nuf
+(
+    "nuf",
+    transportProperties.lookup("nuf")
+);
+
+Info<< "Reading density of fluid 'rhof'\n" << endl;
+dimensionedScalar rhof
+(
+    "rhof",
+    transportProperties.lookup("rhof")
+);
+
+Info<< "Reading density of solid 'rhos'\n" << endl;
+dimensionedScalar rhos
+(
+    "rhos",
+    transportProperties.lookup("rhos")
+);
+
+Info<< "Reading inverse of intrinsic permeability 'k0inv'\n" << endl;
+dimensionedScalar k0inv
+(
+    "k0inv",
+    transportProperties.lookup("k0inv")
+);
+
+Info<< "Reading Ferrari Drag term\n" << endl;
+dimensionedScalar Fkinv
+(
+    "Fkinv",
+    transportProperties.lookup("Fkinv")
+);
+
+Info<< "Reading Terzaghi Coeff. 'sigma'\n" << endl;
+dimensionedScalar sigma
+(
+    "sigma",
+    transportProperties.lookup("sigma")
+);
+
+// Creating Fields //
+
+Info<< "Reading field fluid pressure field 'p'\n" << endl;
 volScalarField p
 (
     IOobject
@@ -26,24 +84,49 @@ volVectorField U
     mesh
 );
 
-Info<< "Reading solid fraction field\n" << endl;     
-volScalarField epss
-(                                                      
+Info<< "Reading porous media velocity field 'Us'\n" << endl;
+volVectorField Us
+(
     IOobject
-    (              
-         "epss", 
-         runTime.timeName(),      
-         mesh,            
-         IOobject::MUST_READ,
-         IOobject::AUTO_WRITE
-    ),           
+    (
+        "Us",
+        runTime.timeName(),
+        mesh,
+        IOobject::MUST_READ,
+        IOobject::AUTO_WRITE
+    ),
     mesh
-);   
+);
 
-//Defining Fluid Fraction Field (porosity)
-volScalarField eps("eps",(1-epss));
+Info<< "Reading solid fraction field 'epss'\n" << endl;
+volScalarField epss
+(
+    IOobject
+    (
+        "epss",
+        runTime.timeName(),
+        mesh,
+        IOobject::MUST_READ,
+        IOobject::AUTO_WRITE
+    ),
+    mesh
+);
 
-// Defenition of Solid Indicator
+Info<< "Reading fluid fraction field 'epsf'\n" << endl;
+volScalarField epsf
+(
+    IOobject
+    (
+        "epsf",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::NO_WRITE   
+    ),
+    (1-epss)
+);
+
+Info<< "Readin solid equilibrium indicator variable Solid\n" << endl;
 volScalarField Solid
 (
     IOobject
@@ -52,79 +135,45 @@ volScalarField Solid
         runTime.timeName(),
         mesh,
         IOobject::READ_IF_PRESENT,
-        IOobject::AUTO_WRITE
+        IOobject::NO_WRITE
     ),
     mesh,
-    dimensionedScalar ("Solid", dimensionSet(0,0,0,0,0,0,0), 0) 
+    dimensionedScalar ("Solid", dimensionSet(0,0,0,0,0,0,0), 0)
 );
 
-#include "createPhi.H"
+volVectorField SolidBorder(fvc::grad(Solid));
 
-Info<< "Reading transportProperties\n" << endl;
-IOdictionary transportProperties
+Info<< "Reading inverse permeability field 'kinv'\n" << endl;
+volScalarField kinv
 (
     IOobject
     (
-        "transportProperties",
-        runTime.constant(),
+        "kinv",
+        runTime.timeName(),
         mesh,
-        IOobject::MUST_READ_IF_MODIFIED,
-        IOobject::NO_WRITE
-    )
-);
-
-dimensionedScalar nuf
-(
-    "nuf",
-    transportProperties.lookup("nuf")
-);
-
-dimensionedScalar rho
-(
-    "rho",
-    transportProperties.lookup("rho")
-);
-
-// Defining Mass Flux
-Info<< "Calculating superficial mass flux\n" << endl;
-surfaceScalarField phiByEps
-(
-	IOobject
-	(
-        "phiByEps",
-	runTime.timeName(),
-	mesh,
-	IOobject::READ_IF_PRESENT,
-        IOobject::NO_WRITE
+        IOobject::NO_READ,
+        IOobject::NO_WRITE 
     ),
-    phi*linearInterpolate(1/(eps+SMALL))
+    (k0inv*(epss*epss)/(max((1-epss)*(1-epss)*(1-epss),SMALL)))
+    
 );
 
-#include "readGravitationalAcceleration.H"
-#include "readhRef.H"
-#include "gh.H"
+#include "createTransportRxnFields.H"
+#include "createPhi.H"
+#include "createSurfaceFluxes.H"
 
+//Choosing solid viscosity model
+singlePhaseTransportModel solid(Us, phis);
+
+//Initializing Terzaghi Stress 
+volVectorField Terzaghi= -(sigma*rhof/rhos)*epss*fvc::grad(p);
+
+//Pressure reference cells
 label pRefCell = 0;
 scalar pRefValue = 0.0;
-setRefCell
-(
-    p,
-    pimple.dict(),
-    pRefCell,
-    pRefValue
-);
-
-if (p.needReference())
-{
-    p += dimensionedScalar
-    (
-        "p",
-        p.dimensions(),
-        pRefValue - getRefCellValue(p, pRefCell)
-    );
-}
-
+setRefCell(p, pimple.dict(), pRefCell, pRefValue);
 mesh.setFluxRequired(p.name());
 
-#include "createPorousMediaFields.H"
-#include "createSolidMechFields.H"
+//Reading Max Courant Number for Porous Media
+scalar maxCoUs = runTime.controlDict().lookupOrDefault<scalar>("maxCoUs", 1.0);
+maxCoUs=maxCoUs;

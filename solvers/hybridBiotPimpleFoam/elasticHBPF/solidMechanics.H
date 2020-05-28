@@ -8,7 +8,7 @@ int iCorr = 0;
 scalar initialResidual = 0;
 
 //Calculating Source Terms
-volVectorField Terzaghi = -(epss*rho/rho_s)*fvc::grad(p);  
+Terzaghi = -(epss*rhof/rhos)*fvc::grad(p);  
 
 //Calculating Displacement
         do
@@ -35,8 +35,8 @@ volVectorField Terzaghi = -(epss*rho/rho_s)*fvc::grad(p);
 		    + Terzaghi
 
                     //Transport Momentum Source 
-                    + fvc::Sp(eps*Drag*rho/rho_s, U)
-                    - fvc::Sp(epss*eps*Drag*rho/rho_s, Us)                  
+                    + fvc::Sp(eps*nuf*kinv*rhof/rhos, U)
+                    - fvc::Sp(epss*eps*nuf*kinv*rhof/rhos, Us)                  
 
                     //Explicit Part of Stress Tensor
                     + epss*divSigmaExp 
