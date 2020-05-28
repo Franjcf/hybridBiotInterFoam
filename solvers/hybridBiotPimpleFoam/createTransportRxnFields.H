@@ -15,18 +15,15 @@ dimensionedScalar n
 );
 
 Info<< "Define if we want to solve Convection Eqn.\n" << endl;
-dimensionedScalar SolveConvectionEqn
-(
-    "SolveConvectionEqn",
-    transportProperties.lookup("SolveConvectionEqn")
-);
+scalar SolveConvectionEqn(transportProperties.lookupOrDefault<scalar>("SolveConvectionEqn",1));
+SolveConvectionEqn =  SolveConvectionEqn;
 
-Info<< "Reading Corrected Ion Diffusivity 'D'\n" << endl;
-volScalarField D
+Info<< "Reading Corrected Ion Diffusivity 'Dion'\n" << endl;
+volScalarField Dion
 (
     IOobject
     (
-        "D",
+        "Dion",
         runTime.timeName(),
         mesh,
         IOobject::NO_READ,

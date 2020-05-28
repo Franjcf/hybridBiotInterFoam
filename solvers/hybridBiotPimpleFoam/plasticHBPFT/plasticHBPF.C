@@ -98,7 +98,7 @@ if(runTime.value() > runTime.startTime().value() + runTime.deltaTValue())
             }         
         }
              
-	if (SolveConvectionEqn.value()==1)
+	if (SolveConvectionEqn==1)
 	{
 	#include "convectionEqn.H" //Scalar Transport
 	}

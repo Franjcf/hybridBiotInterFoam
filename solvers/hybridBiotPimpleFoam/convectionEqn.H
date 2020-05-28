@@ -6,7 +6,7 @@ fvScalarMatrix ConvectionEqn //(C=Concentration=rho*wf/mw)
 (
          fvm::ddt(epsf,C) 
         + fvm::div(phi,C) 
-        - fvm::laplacian((D*epsf),C)
+        - fvm::laplacian((Dion*epsf),C)
         //+ fvm::div(phic,C) //solid movement correction
 );
 

@@ -45,6 +45,8 @@ volVectorField Us
     fvc::ddt(D)
 );
 
+#include "createSurfaceFluxes.H"
+
 autoPtr<volScalarField> Tptr(nullptr);
 
 if (thermalStress)
@@ -112,7 +114,3 @@ activateSolidMechanics = activateSolidMechanics; //prevents unused variable warn
 
 scalar pCoeff (transportProperties.lookupOrDefault<scalar>("pCoeff",1.));
 pCoeff=pCoeff;  
-
-// Reading Maximum Courant Number for Solid 
-scalar maxCoUs = runTime.controlDict().lookupOrDefault<scalar>("maxCoUs", 1.0);
-maxCoUs=maxCoUs; //prevents unused variable warning

@@ -35,8 +35,8 @@ Terzaghi = -(epss*rhof/rhos)*fvc::grad(p);
 		    + Terzaghi
 
                     //Transport Momentum Source 
-                    + fvc::Sp(eps*nuf*kinv*rhof/rhos, U)
-                    - fvc::Sp(epss*eps*nuf*kinv*rhof/rhos, Us)                  
+                    + fvc::Sp(epsf*nuf*kinv*rhof/rhos, U)
+                    - fvc::Sp(epss*epsf*nuf*kinv*rhof/rhos, Us)                  
 
                     //Explicit Part of Stress Tensor
                     + epss*divSigmaExp 

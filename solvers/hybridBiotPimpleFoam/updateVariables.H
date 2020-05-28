@@ -8,7 +8,7 @@ forAll(kinv,celli)
 	{kinv[celli]=0;}
 }
 
-D=Df*pow((1-epss),(n-1));
+Dion=Df*pow((1-epss),(n-1));
 epsf=1-epss;
 
 

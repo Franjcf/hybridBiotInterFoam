@@ -84,20 +84,6 @@ volVectorField U
     mesh
 );
 
-Info<< "Reading porous media velocity field 'Us'\n" << endl;
-volVectorField Us
-(
-    IOobject
-    (
-        "Us",
-        runTime.timeName(),
-        mesh,
-        IOobject::MUST_READ,
-        IOobject::AUTO_WRITE
-    ),
-    mesh
-);
-
 Info<< "Reading solid fraction field 'epss'\n" << endl;
 volScalarField epss
 (
@@ -158,12 +144,9 @@ volScalarField kinv
     
 );
 
-#include "createTransportRxnFields.H"
 #include "createPhi.H"
-#include "createSurfaceFluxes.H"
-
-//Choosing solid viscosity model
-singlePhaseTransportModel solid(Us, phis);
+#include "createSolidMechFields.H"
+#include "createTransportRxnFields.H"
 
 //Initializing Terzaghi Stress 
 volVectorField Terzaghi= -(sigma*rhof/rhos)*epss*fvc::grad(p);
@@ -177,3 +160,6 @@ mesh.setFluxRequired(p.name());
 //Reading Max Courant Number for Porous Media
 scalar maxCoUs = runTime.controlDict().lookupOrDefault<scalar>("maxCoUs", 1.0);
 maxCoUs=maxCoUs;
+
+
+

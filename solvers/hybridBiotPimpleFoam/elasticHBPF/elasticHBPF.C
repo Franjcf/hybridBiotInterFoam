@@ -62,7 +62,6 @@ int main(int argc, char *argv[])
     #include "createRDeltaT.H"
     #include "initContinuityErrs.H"
     #include "createFields.H"
-    #include "createSolidMechFields.H"	
     //turbulence->validate();
 
     #include "readTimeControls.H"
@@ -105,7 +104,7 @@ int main(int argc, char *argv[])
             }
         }
 
-        if (SolveConvectionEqn.value()==1)
+        if (SolveConvectionEqn==1)
         {
         #include "convectionEqn.H" //Scalar Transport
         }

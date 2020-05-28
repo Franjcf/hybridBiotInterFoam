@@ -19,7 +19,6 @@ $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/createTimeControls.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/createRDeltaT.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/initContinuityErrs.H \
 .././createFields.H \
-createSolidMechFields.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/readTimeControls.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/CourantNo.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/setInitialDeltaT.H \
@@ -76,12 +75,9 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/addFunctionObjectOptions.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/createPisoControl.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/createPimpleControl.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/createSimpleControl.H \
-.././createTransportRxnFields.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/createPhi.H \
-.././createSurfaceFluxes.H \
-createControlsSolid.H \
-readMechanicalProperties.H \
-readThermalProperties.H \
+createSolidMechFields.H \
+.././createTransportRxnFields.H \
 readSolidDisplacementFoamControls.H \
 calculateStress.H \
 .././updateRxnCoeff.H \
@@ -204,7 +200,10 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/direction.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/string.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/wordI.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/addDictOption.H \
-createControlSolid.H \
+createControlsSolid.H \
+readMechanicalProperties.H \
+readThermalProperties.H \
+.././createSurfaceFluxes.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/UPstream.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/DynamicList.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/gatherScatter.C \
@@ -356,6 +355,7 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/geometricOneFieldI.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/fvPatchField.C \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/Hasher.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/stringI.H \
+createControlSolid.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/ListOps.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/LIFOStack.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/DynamicListI.H \
@@ -830,7 +830,6 @@ $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/createTimeControls.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/createRDeltaT.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/initContinuityErrs.H :
 .././createFields.H :
-createSolidMechFields.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/readTimeControls.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/CourantNo.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/setInitialDeltaT.H :
@@ -887,12 +886,9 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/addFunctionObjectOptions.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/createPisoControl.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/createPimpleControl.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/createSimpleControl.H :
-.././createTransportRxnFields.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/createPhi.H :
-.././createSurfaceFluxes.H :
-createControlsSolid.H :
-readMechanicalProperties.H :
-readThermalProperties.H :
+createSolidMechFields.H :
+.././createTransportRxnFields.H :
 readSolidDisplacementFoamControls.H :
 calculateStress.H :
 .././updateRxnCoeff.H :
@@ -1015,7 +1011,10 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/direction.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/string.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/wordI.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/addDictOption.H :
-createControlSolid.H :
+createControlsSolid.H :
+readMechanicalProperties.H :
+readThermalProperties.H :
+.././createSurfaceFluxes.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/UPstream.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/DynamicList.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/gatherScatter.C :
@@ -1167,6 +1166,7 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/geometricOneFieldI.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/fvPatchField.C :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/Hasher.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/stringI.H :
+createControlSolid.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/ListOps.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/LIFOStack.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/DynamicListI.H :

@@ -1,6 +1,7 @@
 EXE_INC = -g \
     -I$(LIB_SRC)/transportModels \
     -I$(LIB_SRC)/transportModels/incompressible/lnInclude \
+    -I$(LIB_SRC)/transportModels/incompressible/singlePhaseTransportModel \
     -IderivedFvPatchFields/tractionDisplacement \
     -IderivedFvPatchFields/hydrostaticDisplacement \
     -I$(LIB_SRC)/finiteVolume/lnInclude \
@@ -9,6 +10,9 @@ EXE_INC = -g \
     -I../.
 
 EXE_LIBS = \
+    -lincompressibleTurbulenceModels \
+    -lincompressibleTransportModels \
     -lfiniteVolume \
     -lmeshTools \
-    -lsampling 
+    -lfvOptions \
+    -lsampling
