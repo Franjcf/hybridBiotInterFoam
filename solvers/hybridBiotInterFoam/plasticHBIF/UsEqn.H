@@ -4,11 +4,11 @@ Info<< "\nCalculating Us" << endl;
 volVectorField Terzaghi = -(epss/rho_s)*fvc::grad(p);
 
 //Calculating Explicit Capillary Interaction force
-volVectorField CapTerm ((Solid/rho_s)*
+volVectorField CapTerm ((Solid/rho_s)*eps*
                          (
-			   (eps*PcCoeff*dPcdS + epss*pc)*fvc::grad(alpha1)
+			   (PcCoeff*dPcdS - pc)*fvc::grad(alpha1)
                          +
-                            eps*PcCoeff*(rho1-rho2)*g  
+                            PcCoeff*(rho1-rho2)*g  
                          )
                        ); 
 

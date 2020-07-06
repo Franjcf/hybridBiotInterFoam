@@ -15,4 +15,7 @@ EXE_LIBS = \
     -lfiniteVolume \
     -lmeshTools \
     -lfvOptions \
-    -lsampling
+    -lsampling \
+    -L$(FOAM_USER_LIBBIN) \
+    -lHerschelBulkleyQuemada
+

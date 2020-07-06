@@ -23,12 +23,12 @@ fvVectorMatrix UsEqn
    
 	//Clay Transport Momentum Source
 //      - fvc::Sp(epss*(rhof*nuf*kinv)/rhos, U) //basic
-      - fvc::Sp(epss*(rhof*nuf*kinv)/rhos, U) 
+      - fvc::Sp(epsf*(rhof*nuf*kinv)/rhos, U) 
 
 
       //Momentum Transfer to fluid do to relative velocity 
 //      + fvm::Sp(epss*(rhof*nuf*kinv)/rhos, Us)  //basic
-      + fvm::Sp(epsf*(rhof*nuf*kinv)/rhos, Us)  
+      + fvm::Sp(epsf*epss*(rhof*nuf*kinv)/rhos, Us)  
 
 );	
 

@@ -13,7 +13,7 @@ tmp<fvVectorMatrix> tUEqn
       + fvm::Sp((nuf*kinv),U) 
 
 	//Explicit Drag Term 
-      - fvc::Sp(epss*nuf*kinv,Us) //epss*epsf
+      - fvc::Sp(epss*nuf*kinv,Us) 
 
 	//2.5 D term from A. Ferrari 2015
       + fvm::Sp((nuf*Fkinv),U)
