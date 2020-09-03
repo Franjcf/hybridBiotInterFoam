@@ -1,4 +1,0 @@
-plasticHBIF.C
-
-EXE = $(FOAM_USER_APPBIN)/plasticHBIF_Measure
-

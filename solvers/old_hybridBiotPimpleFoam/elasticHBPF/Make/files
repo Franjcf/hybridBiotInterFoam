@@ -1,6 +1,0 @@
-derivedFvPatchFields/tractionDisplacement/tractionDisplacementFvPatchVectorField.C
-derivedFvPatchFields/hydrostaticDisplacement/hydrostaticDisplacementFvPatchVectorField.C
-elasticHBPF.C
-
-EXE = $(FOAM_USER_APPBIN)/elasticHBPF
-

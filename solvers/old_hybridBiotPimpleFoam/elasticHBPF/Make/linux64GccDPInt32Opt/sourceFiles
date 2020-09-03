@@ -1,4 +1,0 @@
-SOURCE = \
-derivedFvPatchFields/tractionDisplacement/tractionDisplacementFvPatchVectorField.C \
-derivedFvPatchFields/hydrostaticDisplacement/hydrostaticDisplacementFvPatchVectorField.C \
-elasticHBPF.C 

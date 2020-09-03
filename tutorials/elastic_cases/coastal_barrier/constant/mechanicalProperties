@@ -15,25 +15,25 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-rho
+rho //solid density
 {
     type        uniform;
     value       2350;
 }
 
-nu
-{
+nu //poisson ratio
+{ 
     type        uniform;
     value       0.45;
 }
 
-E
+E //Youngs modulus
 {
     type        uniform;
     value       5e9;
 }
 
-planeStress     no; 
 
+planeStress     no; 
 
 // ************************************************************************* //
