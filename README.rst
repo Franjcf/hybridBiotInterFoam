@@ -95,12 +95,6 @@ To clean the directory:
 List of Included Cases
 ################################################################################
 
-**Case Templates**
-
-- Basic templates that includes all the neccesary files to run a succesfull simulation. Each variable within the "0/" directory and the "constant" directory is labeled to make it easier to understand. There is a template case for elastic and plastic systems. 
-
----------------------------------------------------------------------------- 
-
 **Linear Elastic Cases**
 
 - Test cases related to the verification of the solver for poroelastic porous media (Terzaghi consolidation problem and pressure-oscillation in poroelastic core).
@@ -123,9 +117,9 @@ List of Included Cases
 
 ----------------------------------------------------------------------------
 
-**Example Applications**
+**Example Applications/Case Templates**
 
-- Sample cases that show the multi-scale nature of this solver by simulating systems with a combination of porous and free-fluid regions (wave absorption in poroelastic coastal barriers and fracture-driven surface deformation).
+- Sample cases that show the multi-scale nature of this solver by simulating systems with a combination of porous and free-fluid regions (wave absorption in poroelastic coastal barriers and fracture-driven surface deformation). Each variable within the "0/" directory and the "constant" directory is labeled to make it easier to understand. There is a template for both elastic and plastic systems. 
 
 .. figure:: /images/coastal_barrier.png
     :align: right
