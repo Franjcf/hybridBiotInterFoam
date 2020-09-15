@@ -179,24 +179,28 @@ List of Included Libraries
 Citing the Toolbox
 ################################################################################
 
-If you use this solver, please cite the following paper (this will be updated once the publication is accepted):
+If you use this solver, please cite the following paper (theory) and the code (implementation):
 
-Carrillo, F. J., Bourg, I. C., Soulaine, C., 2020, Multiphase Flow Modelling in Multiscale Porous Media: An Open-Sourced Micro-Continuum Approach, arXiv:2003.08374
+**Paper:**
+Carrillo, F. J., Bourg, I. C., 2020. Modeling multiphase flow within and around deformable porous materials:  A darcy-brinkman-biot approach. Earth and Space Science Open Archive, 33. https://www.essoar.org/doi/abs/10.1002/essoar.10504277.2
 
-https://arxiv.org/abs/2003.08374
+**Code:** 
+https://doi.org/10.5281/zenodo.4013969 (DOI: 10.5281/zenodo.4013969)
 
 ################################################################################
 Authors' Publications
 ################################################################################
 1. Carrillo, F. J., Bourg, I. C., 2019. A darcy-brinkman-biot approach to modeling the hydrology and mechanics of porous media containing758 macropores and deformable microporous regions. Water Resources Research 55, 8096–8121
 
-2. Soulaine, C., Gjetvaj, F., Garing, C., Roman, S., Russian, A., Gouze, P., Tchelepi, H., May 2016. The impact of sub-resolution porosity of918 x-ray microtomography images on the permeability. Transport in Porous Media 113 (1), 227–243.919
+2. Carrillo F.J., Bourg, I. C., Soulaine, C., Multiphase flow modeling in multiscale porous media: An open-source micro-continuum approach, J. Comput. Phys. (2020), https://doi.org/10.1016/j.jcpx.2020.100073
 
-3. Soulaine, C., Roman, S., Kovscek, A., Tchelepi, H. A., 2017. Mineral dissolution and wormholing from a pore-scale perspective. Journal of920 Fluid Mechanics 827, 457–483.921 URL https://www.cambridge.org/core/product/identifier/S0022112017004992/type/journal_article922 
+3. Soulaine, C., Gjetvaj, F., Garing, C., Roman, S., Russian, A., Gouze, P., Tchelepi, H., May 2016. The impact of sub-resolution porosity of918 x-ray microtomography images on the permeability. Transport in Porous Media 113 (1), 227–243.919
 
-4. Soulaine, C., Roman, S., Kovscek, A., Tchelepi, H. A., 2018. Pore-scale modelling of multiphase reactive ﬂow. Application to mineral923 dissolution with production of CO2. Journal of Fluid Mechanics 855, 616–645.924 Soulaine, C., Tchelepi, H.A., 2016.Micro-continuumapproachforpore-scalesimulationofsubsurface processes.TransportIn PorousMedia925 113, 431–456
+4. Soulaine, C., Roman, S., Kovscek, A., Tchelepi, H. A., 2017. Mineral dissolution and wormholing from a pore-scale perspective. Journal of920 Fluid Mechanics 827, 457–483.921 URL https://www.cambridge.org/core/product/identifier/S0022112017004992/type/journal_article922 
 
-5. Soulaine, C., Creux, P., Tchelepi, H. A., 2019. Micro-continuum framework for pore-scale multiphase ﬂuid transport in shale formations.916 31 Transport in Porous Media.
+5. Soulaine, C., Roman, S., Kovscek, A., Tchelepi, H. A., 2018. Pore-scale modelling of multiphase reactive ﬂow. Application to mineral923 dissolution with production of CO2. Journal of Fluid Mechanics 855, 616–645.924 Soulaine, C., Tchelepi, H.A., 2016.Micro-continuumapproachforpore-scalesimulationofsubsurface processes.TransportIn PorousMedia925 113, 431–456
 
-6. Horgue, P., Soulaine, C., Franc, J., Guibert, R., Debenest, G., 2015. An open-source toolbox for multiphase ﬂow in porous media. Computer810 Physics Communications 187 (0), 217– 226
+6. Soulaine, C., Creux, P., Tchelepi, H. A., 2019. Micro-continuum framework for pore-scale multiphase ﬂuid transport in shale formations.916 31 Transport in Porous Media.
+
+7. Horgue, P., Soulaine, C., Franc, J., Guibert, R., Debenest, G., 2015. An open-source toolbox for multiphase ﬂow in porous media. Computer810 Physics Communications 187 (0), 217– 226
 
