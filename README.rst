@@ -182,7 +182,7 @@ Citing the Toolbox
 If you use this solver, please cite the following paper (theory) and the code (implementation):
 
 **Paper:**
-Carrillo, F. J., Bourg, I. C., 2020. Modeling multiphase flow within and around deformable porous materials:  A darcy-brinkman-biot approach. Earth and Space Science Open Archive, 33. https://www.essoar.org/doi/abs/10.1002/essoar.10504277.2
+Carrillo, F. J., & Bourg, I. C. (2021). Modeling multiphase flow within and around deformable porous materials: A Darcy-Brinkman-Biot approach. Water Resources Research, 57, e2020WR028734. https://doi.org/10.1029/2020WR028734
 
 **Code:** 
 https://doi.org/10.5281/zenodo.4013969 (DOI: 10.5281/zenodo.4013969)
