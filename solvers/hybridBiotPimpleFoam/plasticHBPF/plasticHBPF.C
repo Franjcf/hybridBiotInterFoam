@@ -102,14 +102,6 @@ if(runTime.value() > runTime.startTime().value() + runTime.deltaTValue())
 	{
 	#include "convectionEqn.H" //Scalar Transport
 	}
-    
-        forAll(U,celli)
-	{
-        if (mag(U[celli])>0.25)
-        {U[celli]=vector::zero;}
-	}         
-
-
  
         runTime.write();
 
